@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marine Bio Vet Office — Monterey Bay Rescue Center</title>
+</head>
+<body>
+<style>
+  /* Self-contained fonts — no external requests needed */
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --ocean:#0a4f6e;--ocean-mid:#1a7a9a;--ocean-light:#2db3d4;--ocean-pale:#e0f7fc;
+    --teal:#00c9a7;--teal-dark:#009e82;
+    --foam:#f0fdfa;--sand:#fff8f0;
+    --coral:#ff7043;--coral-light:#ff9a80;
+    --text-dark:#0d3341;--text-mid:#2a6678;--text-light:#5fa8bd;
+    --warn:#ffb74d;--green:#43d98b;--red:#ff5a5f;
+  }
+  body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:var(--ocean);color:var(--text-dark);min-height:100vh}
+  
+  .dashboard{display:grid;grid-template-rows:auto 1fr;min-height:100vh;background:var(--ocean)}
+  
+  .header{background:linear-gradient(135deg,var(--ocean) 0%,var(--ocean-mid) 100%);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--ocean-light)}
+  .header-brand{display:flex;align-items:center;gap:12px}
+  .logo-circle{width:46px;height:46px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:22px;border:2px solid rgba(255,255,255,0.3)}
+  .header h1{font-size:18px;font-weight:900;color:#fff;line-height:1.1}
+  .header h1 span{font-size:12px;font-weight:600;color:var(--ocean-pale);display:block}
+  .doctor-badge{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:30px;padding:6px 14px;display:flex;align-items:center;gap:8px}
+  .doctor-avatar{width:30px;height:30px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff}
+  .doctor-name{font-size:13px;font-weight:700;color:#fff}
+  .doctor-title{font-size:10px;color:var(--ocean-pale)}
+  .status-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);animation:pulse 1.5s infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.6;transform:scale(1.2)}}
+  
+  .main-grid{display:grid;grid-template-columns:220px 1fr 280px;gap:0;height:calc(100vh - 72px);overflow:hidden}
+  
+  .sidebar{background:rgba(0,0,0,0.2);border-right:1px solid rgba(255,255,255,0.1);padding:14px 10px;display:flex;flex-direction:column;gap:8px;overflow-y:auto}
+  .patient-card{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:14px;padding:12px;text-align:center;margin-bottom:4px}
+  .otter-emoji{font-size:48px;margin-bottom:4px;display:block}
+  .patient-name{font-size:16px;font-weight:900;color:#fff}
+  .patient-sub{font-size:11px;color:var(--ocean-pale);margin-top:2px}
+  .patient-tag{display:inline-block;background:var(--teal);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;margin-top:4px}
+  
+  .nav-section-title{font-size:10px;font-weight:700;color:var(--ocean-light);text-transform:uppercase;letter-spacing:1px;padding:4px 6px}
+  .nav-btn{width:100%;background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:9px 12px;text-align:left;cursor:pointer;display:flex;align-items:center;gap:8px;font-family:inherit;font-size:13px;font-weight:700;color:rgba(255,255,255,0.75);transition:all 0.2s}
+  .nav-btn:hover,.nav-btn.active{background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.3);color:#fff}
+  .nav-btn.active{background:var(--teal);border-color:var(--teal);color:#fff}
+  .nav-icon{font-size:16px;width:20px;text-align:center}
+  
+  .center-panel{background:var(--foam);overflow-y:auto;padding:16px}
+  .panel-section{display:none}
+  .panel-section.active{display:block}
+  
+  .section-header{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+  .section-header h2{font-size:17px;font-weight:800;color:var(--text-dark)}
+  .section-icon{font-size:20px}
+  
+  .visit-form{background:#fff;border-radius:16px;padding:16px;border:1px solid #e0f0f5;margin-bottom:14px}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+  .form-group{display:flex;flex-direction:column;gap:4px}
+  .form-group label{font-size:12px;font-weight:700;color:var(--text-mid);text-transform:uppercase;letter-spacing:0.5px}
+  .form-group input,.form-group select,.form-group textarea{border:1.5px solid #c8e8f0;border-radius:10px;padding:8px 12px;font-family:inherit;font-size:13px;color:var(--text-dark);background:#f8fdff;outline:none;width:100%;transition:border-color 0.2s}
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--ocean-light)}
+  .form-group textarea{resize:none;height:70px}
+  .form-group.full{grid-column:span 2}
+  
+  .camera-box{background:#e0f0f8;border:2px dashed var(--ocean-light);border-radius:14px;overflow:hidden;position:relative;min-height:160px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px}
+  .camera-box video,.camera-box canvas{width:100%;border-radius:12px;display:none}
+  .camera-placeholder{text-align:center;color:var(--text-mid)}
+  .camera-placeholder span{font-size:36px;display:block;margin-bottom:4px}
+  .camera-placeholder p{font-size:12px;font-weight:700}
+  .snap-overlay{position:absolute;bottom:8px;right:8px;display:flex;gap:6px}
+  
+  .action-btns{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+  .action-btn{border:none;border-radius:14px;padding:10px 6px;cursor:pointer;font-family:inherit;font-size:11px;font-weight:800;display:flex;flex-direction:column;align-items:center;gap:4px;transition:all 0.15s;position:relative;overflow:hidden}
+  .action-btn:active{transform:scale(0.94)}
+  .action-btn .btn-icon{font-size:22px}
+  .action-btn.feed{background:linear-gradient(135deg,#43d98b,#00c9a7);color:#004d3a}
+  .action-btn.bandage{background:linear-gradient(135deg,#ff9a80,#ff7043);color:#5c1f0d}
+  .action-btn.medicine{background:linear-gradient(135deg,#64b5f6,#1e88e5);color:#0a2e5c}
+  .action-btn.xray{background:linear-gradient(135deg,#b39ddb,#7e57c2);color:#2a1a5c}
+  .action-btn.scan{background:linear-gradient(135deg,var(--warn),#ff8f00);color:#4a2800}
+  .action-btn.camera-btn{background:linear-gradient(135deg,#80cbc4,#26a69a);color:#00332e}
+  .action-btn.sleep{background:linear-gradient(135deg,#90a4ae,#607d8b);color:#1a2b35}
+  .action-btn.discharge{background:linear-gradient(135deg,var(--green),#00acc1);color:#003326}
+  .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,0.4);width:60px;height:60px;margin-top:-30px;margin-left:-30px;animation:ripple 0.5s linear;pointer-events:none}
+  @keyframes ripple{from{transform:scale(0);opacity:1}to{transform:scale(3);opacity:0}}
+  
+  .vitals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+  .vital-card{background:#fff;border:1px solid #d0eaf5;border-radius:12px;padding:10px;text-align:center}
+  .vital-label{font-size:10px;font-weight:700;color:var(--text-light);text-transform:uppercase;margin-bottom:2px}
+  .vital-value{font-size:20px;font-weight:900;color:var(--ocean)}
+  .vital-unit{font-size:10px;color:var(--text-mid)}
+  .vital-status{font-size:10px;font-weight:700;padding:2px 6px;border-radius:6px;margin-top:4px;display:inline-block}
+  .vital-status.good{background:#e8f5e9;color:#2e7d32}
+  .vital-status.warn{background:#fff3e0;color:#e65100}
+  
+  .heart-monitor-card{background:#0d1b2a;border-radius:16px;padding:12px;margin-bottom:14px}
+  .heart-monitor-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .heart-monitor-header span{font-size:12px;font-weight:700;color:#00e676}
+  .heart-monitor-header .bpm{font-family:'Courier New',monospace;font-size:18px;font-weight:700;color:#00e676}
+  canvas#heartCanvas{width:100%;height:70px;display:block}
+  
+  .log-entries{display:flex;flex-direction:column;gap:8px;max-height:300px;overflow-y:auto}
+  .log-entry{background:#fff;border:1px solid #e0f0f5;border-radius:12px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start}
+  .log-time{font-size:10px;font-weight:700;color:var(--text-light);white-space:nowrap;font-family:'Courier New',monospace;margin-top:2px}
+  .log-text{font-size:13px;color:var(--text-dark);font-weight:600}
+  .log-icon{font-size:16px;flex-shrink:0}
+  .log-empty{text-align:center;padding:30px;color:var(--text-light);font-size:13px;font-weight:700}
+  
+  .right-panel{background:#fff;border-left:1px solid #d0eaf5;overflow-y:auto;display:flex;flex-direction:column}
+  
+  .xray-panel{padding:14px;border-bottom:1px solid #e8f4f8}
+  .xray-label{font-size:11px;font-weight:800;color:var(--text-mid);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+  .xray-box{background:#111827;border-radius:12px;overflow:hidden;position:relative;min-height:200px;display:flex;align-items:center;justify-content:center}
+  .xray-box svg{width:100%;height:200px}
+  .xray-overlay{position:absolute;top:6px;left:6px;font-size:9px;font-family:'Courier New',monospace;color:#00e676;opacity:0.7;line-height:1.6}
+  .scan-line{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#00e676,transparent);animation:scan 3s linear infinite;display:none}
+  @keyframes scan{from{top:0}to{top:200px}}
+  
+  .checklist-panel{padding:14px;border-bottom:1px solid #e8f4f8;flex:1}
+  .check-item{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #f0f8fb;cursor:pointer}
+  .check-item:last-child{border-bottom:none}
+  .check-box{width:20px;height:20px;border-radius:6px;border:2px solid var(--ocean-light);display:flex;align-items:center;justify-content:center;font-size:12px;transition:all 0.2s;flex-shrink:0}
+  .check-box.checked{background:var(--teal);border-color:var(--teal);color:#fff}
+  .check-label{font-size:13px;font-weight:700;color:var(--text-dark)}
+  .check-status{margin-left:auto;font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px}
+  .check-status.ok{background:#e8f5e9;color:#2e7d32}
+  .check-status.pending{background:#e3f2fd;color:#1565c0}
+  
+  .photo-strip{padding:12px 14px;border-top:1px solid #e8f4f8}
+  .photo-strip-label{font-size:11px;font-weight:800;color:var(--text-mid);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+  .photos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+  .photo-thumb{background:#e0f0f8;border-radius:8px;aspect-ratio:1;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:20px;position:relative}
+  .photo-thumb img{width:100%;height:100%;object-fit:cover}
+  
+  .btn{border:none;border-radius:10px;padding:8px 14px;cursor:pointer;font-family:inherit;font-weight:800;font-size:12px;transition:all 0.2s}
+  .btn-teal{background:var(--teal);color:#fff}
+  .btn-teal:hover{background:var(--teal-dark)}
+  .btn-ghost{background:transparent;border:1.5px solid var(--ocean-light);color:var(--ocean)}
+  .btn-red{background:var(--red);color:#fff}
+  .btn-sm{padding:6px 12px;font-size:11px}
+  
+  .toast{position:fixed;bottom:20px;right:20px;background:var(--ocean);color:#fff;padding:10px 18px;border-radius:12px;font-size:13px;font-weight:700;transform:translateY(100px);opacity:0;transition:all 0.3s;z-index:999;border-left:4px solid var(--teal);max-width:240px}
+  .toast.show{transform:translateY(0);opacity:1}
+  
+  .modal{display:none;position:fixed;inset:0;background:rgba(0,40,60,0.7);z-index:100;align-items:center;justify-content:center}
+  .modal.open{display:flex}
+  .modal-box{background:#fff;border-radius:20px;padding:24px;max-width:360px;width:90%;text-align:center}
+  .modal-box h3{font-size:18px;font-weight:900;color:var(--text-dark);margin-bottom:8px}
+  .modal-box p{font-size:13px;color:var(--text-mid);margin-bottom:16px;line-height:1.5}
+  .modal-btns{display:flex;gap:10px;justify-content:center}
+  
+  .water-bar{height:4px;background:linear-gradient(90deg,var(--ocean-light),var(--teal),var(--ocean-light));background-size:200%;animation:water 2s linear infinite}
+  @keyframes water{0%{background-position:0%}100%{background-position:200%}}
+  
+  ::-webkit-scrollbar{width:4px}
+  ::-webkit-scrollbar-track{background:transparent}
+  ::-webkit-scrollbar-thumb{background:var(--ocean-light);border-radius:4px}
+</style>
+
+<div class="dashboard">
+  <div class="water-bar"></div>
+  <div class="header">
+    <div class="header-brand">
+      <div class="logo-circle">🌊</div>
+      <div>
+        <h1>Marine Bio Vet Office <span>Monterey Bay Rescue Center</span></h1>
+      </div>
+    </div>
+    <div class="doctor-badge">
+      <div class="status-dot"></div>
+      <div class="doctor-avatar">JD</div>
+      <div>
+        <div class="doctor-name">Dr. Juliet D.</div>
+        <div class="doctor-title">Marine Biologist & Vet</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-grid">
+    <div class="sidebar">
+      <div class="patient-card">
+        <span class="otter-emoji">🦦</span>
+        <div class="patient-name">Onyx</div>
+        <div class="patient-sub">Sea Otter · Female</div>
+        <div class="patient-sub" style="font-size:10px;margin-top:2px">Monterey Bay Rescue</div>
+        <div class="patient-tag">In Care ✦</div>
+      </div>
+
+      <div class="nav-section-title">Office</div>
+      <button class="nav-btn active" onclick="showPanel('visit',this)"><span class="nav-icon">📋</span>Today's Visit</button>
+      <button class="nav-btn" onclick="showPanel('vitals',this)"><span class="nav-icon">💓</span>Vitals & Monitor</button>
+      <button class="nav-btn" onclick="showPanel('log',this)"><span class="nav-icon">📓</span>Daily Log</button>
+      <button class="nav-btn" onclick="showPanel('camera',this)"><span class="nav-icon">📷</span>Patient Photo</button>
+
+      <div class="nav-section-title" style="margin-top:8px">Quick Actions</div>
+      <button class="nav-btn" onclick="doAction('feed')"><span class="nav-icon">🐟</span>Feed Onyx</button>
+      <button class="nav-btn" onclick="doAction('bandage')"><span class="nav-icon">🩹</span>Check Bandage</button>
+      <button class="nav-btn" onclick="doAction('medicine')"><span class="nav-icon">💊</span>Give Medicine</button>
+      <button class="nav-btn" onclick="doAction('sleep')"><span class="nav-icon">😴</span>Rest Time</button>
+      <button class="nav-btn" onclick="openDischarge()"><span class="nav-icon">⭐</span>Sign Chart</button>
+    </div>
+
+    <div class="center-panel">
+
+      <div id="panel-visit" class="panel-section active">
+        <div class="section-header">
+          <span class="section-icon">📋</span>
+          <h2>Today's Appointment</h2>
+        </div>
+        <div class="visit-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Patient Name</label>
+              <input type="text" id="petName" value="Onyx" placeholder="Pet name...">
+            </div>
+            <div class="form-group">
+              <label>Visit Date</label>
+              <input type="text" id="visitDate" value="" placeholder="Today's date">
+            </div>
+            <div class="form-group">
+              <label>Animal Type</label>
+              <select id="animalType">
+                <option>Sea Otter</option>
+                <option>Harbor Seal</option>
+                <option>Dolphin</option>
+                <option>Sea Turtle</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Weight (lbs)</label>
+              <input type="number" id="weight" value="28" min="1" max="200">
+            </div>
+            <div class="form-group full">
+              <label>Reason for Visit</label>
+              <textarea id="reason" placeholder="Why did Onyx come in today?">Routine checkup and bandage change on left flipper</textarea>
+            </div>
+            <div class="form-group full">
+              <label>Doctor's Notes</label>
+              <textarea id="notes" placeholder="Write your notes here..."></textarea>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;justify-content:flex-end">
+            <button class="btn btn-ghost btn-sm" onclick="clearForm()">Clear</button>
+            <button class="btn btn-teal btn-sm" onclick="saveVisit()">💾 Save Visit Record</button>
+          </div>
+        </div>
+
+        <div class="section-header">
+          <span class="section-icon">⚡</span>
+          <h2>Treatment Actions</h2>
+        </div>
+        <div class="action-btns">
+          <button class="action-btn feed" onclick="doAction('feed',this)"><span class="btn-icon">🐟</span>Feed</button>
+          <button class="action-btn bandage" onclick="doAction('bandage',this)"><span class="btn-icon">🩹</span>Bandage</button>
+          <button class="action-btn medicine" onclick="doAction('medicine',this)"><span class="btn-icon">💊</span>Medicine</button>
+          <button class="action-btn xray" onclick="doAction('xray',this)"><span class="btn-icon">🔬</span>X-Ray</button>
+          <button class="action-btn scan" onclick="doAction('scan',this)"><span class="btn-icon">📡</span>Scan</button>
+          <button class="action-btn camera-btn" onclick="showPanel('camera',document.querySelector('.nav-btn:nth-of-type(4)'))"><span class="btn-icon">📷</span>Photo</button>
+          <button class="action-btn sleep" onclick="doAction('sleep',this)"><span class="btn-icon">😴</span>Rest</button>
+          <button class="action-btn discharge" onclick="openDischarge()"><span class="btn-icon">⭐</span>Sign</button>
+        </div>
+      </div>
+
+      <div id="panel-vitals" class="panel-section">
+        <div class="section-header">
+          <span class="section-icon">💓</span>
+          <h2>Vitals Monitor</h2>
+        </div>
+        <div class="heart-monitor-card">
+          <div class="heart-monitor-header">
+            <span>♥ HEART MONITOR — ONYX</span>
+            <span class="bpm"><span id="bpmNum">62</span> BPM</span>
+          </div>
+          <canvas id="heartCanvas" width="600" height="70"></canvas>
+        </div>
+        <div class="vitals-grid">
+          <div class="vital-card">
+            <div class="vital-label">Heart Rate</div>
+            <div class="vital-value" id="hrVal">62</div>
+            <div class="vital-unit">beats/min</div>
+            <div class="vital-status good">Normal ✓</div>
+          </div>
+          <div class="vital-card">
+            <div class="vital-label">Temperature</div>
+            <div class="vital-value" id="tempVal">101.3</div>
+            <div class="vital-unit">°F</div>
+            <div class="vital-status good">Normal ✓</div>
+          </div>
+          <div class="vital-card">
+            <div class="vital-label">Oxygen</div>
+            <div class="vital-value" id="o2Val">97</div>
+            <div class="vital-unit">% SpO2</div>
+            <div class="vital-status good">Good ✓</div>
+          </div>
+          <div class="vital-card">
+            <div class="vital-label">Weight</div>
+            <div class="vital-value">28</div>
+            <div class="vital-unit">lbs</div>
+            <div class="vital-status warn">Low range</div>
+          </div>
+          <div class="vital-card">
+            <div class="vital-label">Resp. Rate</div>
+            <div class="vital-value">18</div>
+            <div class="vital-unit">breaths/min</div>
+            <div class="vital-status good">Normal ✓</div>
+          </div>
+          <div class="vital-card">
+            <div class="vital-label">Recovery</div>
+            <div class="vital-value">73</div>
+            <div class="vital-unit">%</div>
+            <div class="vital-status good">On track ✓</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-teal btn-sm" onclick="updateVitals()">🔄 Refresh Vitals</button>
+          <button class="btn btn-ghost btn-sm" onclick="doAction('scan')">📡 Run Scan</button>
+        </div>
+      </div>
+
+      <div id="panel-log" class="panel-section">
+        <div class="section-header">
+          <span class="section-icon">📓</span>
+          <h2>Daily Care Log</h2>
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:12px">
+          <input type="text" id="logInput" placeholder="Write a log entry..." style="flex:1;border:1.5px solid #c8e8f0;border-radius:10px;padding:8px 12px;font-family:inherit;font-size:13px;outline:none">
+          <button class="btn btn-teal" onclick="addLog('📝',document.getElementById('logInput').value)">Add Entry</button>
+        </div>
+        <div id="logList" class="log-entries">
+          <div class="log-empty">No log entries yet! Start by feeding Onyx or checking her bandage. 🦦</div>
+        </div>
+      </div>
+
+      <div id="panel-camera" class="panel-section">
+        <div class="section-header">
+          <span class="section-icon">📷</span>
+          <h2>Patient Photo</h2>
+        </div>
+        <div class="camera-box" id="cameraBox">
+          <div class="camera-placeholder" id="camPlaceholder">
+            <span>📷</span>
+            <p>Click to use camera</p>
+            <p style="font-size:11px;margin-top:4px;color:#5fa8bd">Take a photo of your patient!</p>
+          </div>
+          <video id="camVideo" autoplay playsinline></video>
+          <canvas id="snapCanvas" style="display:none"></canvas>
+          <div class="snap-overlay" id="snapOverlay" style="display:none">
+            <button class="btn btn-red btn-sm" onclick="stopCamera()">✕ Stop</button>
+            <button class="btn btn-teal btn-sm" onclick="takePhoto()">📸 Snap!</button>
+          </div>
+        </div>
+        <div style="margin-top:10px;display:flex;gap:8px">
+          <button class="btn btn-teal btn-sm" onclick="startCamera()">📷 Open Camera</button>
+        </div>
+        <div style="margin-top:12px">
+          <div class="photo-strip-label">Saved Photos</div>
+          <div class="photos-grid" id="photoGrid">
+            <div class="photo-thumb">🦦</div>
+            <div class="photo-thumb">🌊</div>
+            <div class="photo-thumb">➕</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="right-panel">
+      <div class="xray-panel">
+        <div class="xray-label">X-Ray Viewer — Onyx</div>
+        <div class="xray-box" id="xrayBox">
+          <div class="xray-overlay" id="xrayOverlay">PATIENT: ONYX<br>SEA OTTER<br>DATE: <span id="xDate"></span><br>DR. JULIET D.</div>
+          <div class="scan-line" id="scanLine"></div>
+          <svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" id="xraySvg">
+            <rect width="280" height="200" fill="#111827"/>
+            <ellipse cx="140" cy="105" rx="72" ry="52" fill="none" stroke="#e8f4f8" stroke-width="1.2" opacity="0.3"/>
+            <ellipse cx="140" cy="95" rx="56" ry="40" fill="#1e3a4a" stroke="#b0d0e0" stroke-width="0.8" opacity="0.5"/>
+            <path d="M140 55 Q160 60 168 78 Q175 95 170 115 Q162 132 140 137 Q118 132 110 115 Q105 95 112 78 Q120 60 140 55Z" fill="#2a4a5a" stroke="#7ab8cc" stroke-width="0.8" opacity="0.7"/>
+            <ellipse cx="140" cy="56" rx="26" ry="20" fill="#1e3a4a" stroke="#b0d0e0" stroke-width="0.8" opacity="0.6"/>
+            <ellipse cx="132" cy="50" rx="9" ry="12" fill="none" stroke="#c0dce8" stroke-width="0.7" opacity="0.7"/>
+            <ellipse cx="148" cy="50" rx="9" ry="12" fill="none" stroke="#c0dce8" stroke-width="0.7" opacity="0.7"/>
+            <rect x="127" y="44" width="4" height="6" rx="1" fill="#8cc8dc" opacity="0.5"/>
+            <rect x="149" y="44" width="4" height="6" rx="1" fill="#8cc8dc" opacity="0.5"/>
+            <ellipse cx="129" cy="51" rx="3" ry="4" fill="#6ab8d0" opacity="0.6"/>
+            <ellipse cx="151" cy="51" rx="3" ry="4" fill="#6ab8d0" opacity="0.6"/>
+            <path d="M130 76 Q140 74 150 76" fill="none" stroke="#80c0d8" stroke-width="0.8" opacity="0.6"/>
+            <line x1="140" y1="74" x2="140" y2="68" stroke="#80c0d8" stroke-width="0.7" opacity="0.5"/>
+            <path d="M120 85 Q130 80 140 82 Q150 80 160 85 L158 118 Q150 126 140 128 Q130 126 122 118Z" fill="#1e4060" stroke="#60aac8" stroke-width="0.8" opacity="0.6"/>
+            <path d="M133 88 L133 124 M137 87 L137 125 M143 87 L143 125 M147 88 L147 124" stroke="#4090b0" stroke-width="0.5" opacity="0.6"/>
+            <path d="M122 91 L158 91 M122 97 L158 97 M122 103 L158 103 M122 109 L158 109 M122 115 L158 115" stroke="#4090b0" stroke-width="0.4" opacity="0.4"/>
+            <ellipse cx="134" cy="100" rx="7" ry="9" fill="none" stroke="#50b0d0" stroke-width="0.8" opacity="0.7"/>
+            <path d="M134 91 Q131 96 134 100 Q137 104 134 109" fill="none" stroke="#40a0c0" stroke-width="0.7" opacity="0.6"/>
+            <path d="M140 128 Q128 138 100 148 Q88 152 82 158" fill="none" stroke="#7ab8cc" stroke-width="1.2" opacity="0.5"/>
+            <path d="M140 128 Q152 138 180 148 Q192 152 198 158" fill="none" stroke="#7ab8cc" stroke-width="1.2" opacity="0.5"/>
+            <path d="M100 148 Q90 162 85 175" fill="none" stroke="#6aacbf" stroke-width="1" opacity="0.45"/>
+            <path d="M180 148 Q190 162 195 175" fill="none" stroke="#6aacbf" stroke-width="1" opacity="0.45"/>
+            <path d="M82 158 Q78 168 74 178 Q72 184 76 186" fill="none" stroke="#5aa0b5" stroke-width="0.9" opacity="0.45"/>
+            <path d="M198 158 Q202 168 206 178 Q208 184 204 186" fill="none" stroke="#5aa0b5" stroke-width="0.9" opacity="0.45"/>
+            <path d="M76 186 Q70 194 68 198" fill="none" stroke="#5090a5" stroke-width="0.8" opacity="0.4"/>
+            <path d="M204 186 Q210 194 212 198" fill="none" stroke="#5090a5" stroke-width="0.8" opacity="0.4"/>
+            <path d="M140 137 Q140 155 140 168 Q136 178 130 182" fill="none" stroke="#7ab8cc" stroke-width="1.1" opacity="0.5"/>
+            <path d="M130 182 Q120 186 116 192 Q112 196 115 198" fill="none" stroke="#6aacbf" stroke-width="0.9" opacity="0.45"/>
+            <path d="M115 198 Q110 200 108 199" fill="none" stroke="#5090a5" stroke-width="0.8" opacity="0.4"/>
+            <path d="M85 170 Q95 165 100 158" fill="none" stroke="#5aa0b5" stroke-width="0.7" opacity="0.4" stroke-dasharray="2,2"/>
+            <path d="M115 180 Q110 172 100 168" fill="none" stroke="#5aa0b5" stroke-width="0.7" opacity="0.35" stroke-dasharray="2,2"/>
+            <path d="M140 168 Q142 176 150 182 Q158 185 162 192" fill="none" stroke="#6aacbf" stroke-width="0.9" opacity="0.45"/>
+            <path d="M120 88 Q108 95 100 105 Q96 118 100 128 Q108 138 120 130" fill="none" stroke="#5aa0b5" stroke-width="0.7" opacity="0.4" stroke-dasharray="3,2"/>
+            <path d="M160 88 Q172 95 180 105 Q184 118 180 128 Q172 138 160 130" fill="none" stroke="#5aa0b5" stroke-width="0.7" opacity="0.4" stroke-dasharray="3,2"/>
+            <rect x="84" y="128" width="12" height="2" rx="1" fill="#00e676" opacity="0.6"/>
+            <text x="84" y="125" fill="#00e676" font-size="5" font-family="monospace" opacity="0.8">✓ L.FLIPPER</text>
+            <ellipse cx="90" cy="120" rx="10" ry="8" fill="none" stroke="#00e676" stroke-width="0.8" stroke-dasharray="2,1" opacity="0.5"/>
+          </svg>
+        </div>
+        <div style="margin-top:8px;display:flex;gap:6px">
+          <button class="btn btn-ghost btn-sm" style="flex:1;font-size:10px" onclick="runXray()">🔬 Run X-Ray Scan</button>
+        </div>
+      </div>
+
+      <div class="checklist-panel">
+        <div class="xray-label">Today's Checkup</div>
+        <div id="checklist">
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <span class="check-label">👀 Eyes</span>
+            <span class="check-status ok">Good</span>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <span class="check-label">👂 Ears</span>
+            <span class="check-status ok">Good</span>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <span class="check-label">👃 Nose</span>
+            <span class="check-status pending">Check</span>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <span class="check-label">💓 Heart</span>
+            <span class="check-status pending">Check</span>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <span class="check-label">🐾 Flippers</span>
+            <span class="check-status ok">Good</span>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <span class="check-label">🦷 Teeth</span>
+            <span class="check-status pending">Check</span>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <span class="check-label">🩹 Bandage</span>
+            <span class="check-status pending">Check</span>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <span class="check-label">🐟 Fed Today</span>
+            <span class="check-status ok">Done</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="photo-strip">
+        <div class="photo-strip-label">Patient Gallery</div>
+        <div class="photos-grid" id="mainPhotoGrid">
+          <div class="photo-thumb">🦦</div>
+          <div class="photo-thumb">🌊</div>
+          <div class="photo-thumb">⭐</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="modal" id="dischargeModal">
+  <div class="modal-box">
+    <div style="font-size:48px;margin-bottom:8px">⭐</div>
+    <h3>Sign the Chart!</h3>
+    <p>Onyx has been seen by Dr. Juliet D. today. Are you ready to sign the visit and save the record?</p>
+    <div style="background:#f0fdfa;border-radius:12px;padding:12px;margin-bottom:14px;text-align:left;font-size:12px;line-height:1.8;color:var(--text-mid)">
+      <strong style="color:var(--text-dark)">Patient:</strong> Onyx (Sea Otter)<br>
+      <strong style="color:var(--text-dark)">Doctor:</strong> Dr. Juliet D.<br>
+      <strong style="color:var(--text-dark)">Date:</strong> <span id="modalDate"></span><br>
+      <strong style="color:var(--text-dark)">Status:</strong> In Recovery ✓
+    </div>
+    <div class="modal-btns">
+      <button class="btn btn-ghost" onclick="document.getElementById('dischargeModal').classList.remove('open')">Cancel</button>
+      <button class="btn btn-teal" onclick="signChart()">✅ Sign & Save!</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const sounds = {
+  click: () => playTone([880,660,440],0.08),
+  feed: () => playTone([440,523,659,784],0.1),
+  bandage: () => playTone([392,392,523],0.08),
+  medicine: () => playTone([659,698,784,880],0.08),
+  scan: () => playBeep(200,0.12),
+  xray: () => playBeep(300,0.1),
+  heart: () => playTone([220,220],0.06),
+  success: () => playTone([523,659,784,1047],0.1),
+  rest: () => playTone([440,392,349,330],0.07)
+};
+
+function playTone(freqs,vol){
+  try{
+    const ac=new(window.AudioContext||window.webkitAudioContext)();
+    freqs.forEach((f,i)=>{
+      const o=ac.createOscillator(),g=ac.createGain();
+      o.connect(g);g.connect(ac.destination);
+      o.frequency.value=f;g.gain.value=vol;
+      const t=ac.currentTime+i*0.12;
+      o.start(t);o.stop(t+0.1);
+    });
+  }catch(e){}
+}
+
+function playBeep(f,v){
+  try{
+    const ac=new(window.AudioContext||window.webkitAudioContext)();
+    const o=ac.createOscillator(),g=ac.createGain();
+    o.connect(g);g.connect(ac.destination);
+    o.frequency.value=f;o.type='sawtooth';
+    g.gain.setValueAtTime(v,ac.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001,ac.currentTime+0.4);
+    o.start();o.stop(ac.currentTime+0.4);
+  }catch(e){}
+}
+
+const logData=[];
+function addLog(icon,text,silent){
+  if(!text||!text.trim())return;
+  const now=new Date();
+  const timeStr=now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  logData.unshift({icon,text,time:timeStr});
+  renderLog();
+  if(!silent){sounds.click();showToast(icon+' '+text);}
+}
+
+function renderLog(){
+  const el=document.getElementById('logList');
+  if(logData.length===0){el.innerHTML='<div class="log-empty">No log entries yet! Start by feeding Onyx or checking her bandage. 🦦</div>';return;}
+  el.innerHTML=logData.map(e=>`<div class="log-entry"><span class="log-icon">${e.icon}</span><div><div class="log-text">${e.text}</div></div><span class="log-time">${e.time}</span></div>`).join('');
+}
+
+const actions={
+  feed:{icon:'🐟',msg:'Fed Onyx — 3 anchovies + vitamins!',sound:'feed'},
+  bandage:{icon:'🩹',msg:'Checked left flipper bandage — looking clean!',sound:'bandage'},
+  medicine:{icon:'💊',msg:'Gave pain relief medicine',sound:'medicine'},
+  xray:{icon:'🔬',msg:'X-Ray scan completed',sound:'xray'},
+  scan:{icon:'📡',msg:'Full body scan running...',sound:'scan'},
+  sleep:{icon:'😴',msg:'Onyx is resting comfortably',sound:'rest'}
+};
+
+function doAction(type,btn){
+  const a=actions[type];if(!a)return;
+  sounds[a.sound]&&sounds[a.sound]();
+  addLog(a.icon,a.msg,true);
+  showToast(a.icon+' '+a.msg);
+  if(btn){rippleEffect(btn);}
+  if(type==='xray')runXray();
+}
+
+function rippleEffect(el){
+  const r=document.createElement('div');
+  r.classList.add('ripple');
+  el.appendChild(r);
+  setTimeout(()=>r.remove(),500);
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+function showPanel(id,btn){
+  document.querySelectorAll('.panel-section').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  if(id==='vitals')startHeartMonitor();
+  sounds.click();
+}
+
+function toggleCheck(item){
+  const box=item.querySelector('.check-box');
+  const status=item.querySelector('.check-status');
+  const label=item.querySelector('.check-label').textContent;
+  const isChecked=box.classList.toggle('checked');
+  if(isChecked){
+    box.textContent='✓';
+    status.className='check-status ok';
+    status.textContent='Good';
+    addLog('✅',label.replace(/^[^\s]+\s/,'')+' — checked & good!');
+  } else {
+    box.textContent='';
+    status.className='check-status pending';
+    status.textContent='Check';
+  }
+  sounds.click();
+}
+
+function saveVisit(){
+  const name=document.getElementById('petName').value||'Onyx';
+  const reason=document.getElementById('reason').value;
+  addLog('📋',`Visit saved for ${name}: ${reason||'routine visit'}`);
+  sounds.success();
+  showToast('✅ Visit record saved!');
+}
+
+function clearForm(){
+  document.getElementById('notes').value='';
+  sounds.click();
+}
+
+let heartInterval=null;
+let hCanvas,hCtx,hPoints=[],hOffset=0;
+
+function startHeartMonitor(){
+  hCanvas=document.getElementById('heartCanvas');
+  hCtx=hCanvas.getContext('2d');
+  hCanvas.width=hCanvas.offsetWidth||600;
+  if(heartInterval)return;
+  heartInterval=setInterval(drawHeart,40);
+}
+
+function drawHeart(){
+  if(!hCtx)return;
+  const w=hCanvas.width,h=hCanvas.height;
+  hCtx.fillStyle='#0d1b2a';
+  hCtx.fillRect(0,0,w,h);
+  hCtx.strokeStyle='rgba(0,230,118,0.15)';
+  hCtx.lineWidth=0.5;
+  for(let y=0;y<h;y+=10){hCtx.beginPath();hCtx.moveTo(0,y);hCtx.lineTo(w,y);hCtx.stroke();}
+  hOffset+=2;
+  const bpm=62;const period=Math.round(60/bpm*25);
+  const pts=[];
+  for(let x=0;x<w;x++){
+    const pos=(x+hOffset)%period;
+    let y=h/2;
+    if(pos<2)y=h/2+2*pos;
+    else if(pos<4)y=h/2+4-20*(pos-2);
+    else if(pos<5)y=h/2-36+40*(pos-4);
+    else if(pos<6)y=h/2+4-6*(pos-5);
+    else if(pos<8)y=h/2-2+3*(pos-6);
+    else y=h/2+Math.sin((pos/period)*Math.PI*2)*1.5;
+    pts.push({x,y});
+  }
+  hCtx.strokeStyle='#00e676';
+  hCtx.lineWidth=1.8;
+  hCtx.beginPath();
+  pts.forEach((p,i)=>i===0?hCtx.moveTo(p.x,p.y):hCtx.lineTo(p.x,p.y));
+  hCtx.stroke();
+  if(hOffset%40<2){sounds.heart();}
+}
+
+function updateVitals(){
+  const hr=58+Math.floor(Math.random()*10);
+  const temp=(101+Math.random()*0.8).toFixed(1);
+  const o2=96+Math.floor(Math.random()*3);
+  document.getElementById('hrVal').textContent=hr;
+  document.getElementById('bpmNum').textContent=hr;
+  document.getElementById('tempVal').textContent=temp;
+  document.getElementById('o2Val').textContent=o2;
+  showToast('💉 Vitals updated!');
+  sounds.scan();
+}
+
+function runXray(){
+  const sl=document.getElementById('scanLine');
+  sl.style.display='block';
+  setTimeout(()=>{sl.style.display='none';addLog('🔬','X-Ray scan complete — skeleton looks great!');},3000);
+  sounds.xray();
+  showToast('🔬 X-Ray scanning Onyx...');
+}
+
+function openDischarge(){
+  document.getElementById('modalDate').textContent=new Date().toLocaleDateString();
+  document.getElementById('dischargeModal').classList.add('open');
+  sounds.click();
+}
+
+function signChart(){
+  sounds.success();
+  addLog('⭐','Chart signed by Dr. Juliet D. — Visit complete!');
+  document.getElementById('dischargeModal').classList.remove('open');
+  showToast('⭐ Chart signed! Great work Dr. Juliet!');
+}
+
+let stream=null;
+function startCamera(){
+  navigator.mediaDevices.getUserMedia({video:{facingMode:'user'}})
+    .then(s=>{
+      stream=s;
+      const v=document.getElementById('camVideo');
+      v.srcObject=s;v.style.display='block';
+      document.getElementById('camPlaceholder').style.display='none';
+      document.getElementById('snapOverlay').style.display='flex';
+      sounds.click();
+    }).catch(()=>showToast('📷 Camera not available — ask a grown-up!'));
+}
+
+function stopCamera(){
+  if(stream)stream.getTracks().forEach(t=>t.stop());
+  document.getElementById('camVideo').style.display='none';
+  document.getElementById('camPlaceholder').style.display='flex';
+  document.getElementById('snapOverlay').style.display='none';
+}
+
+function takePhoto(){
+  const v=document.getElementById('camVideo');
+  const c=document.getElementById('snapCanvas');
+  c.width=v.videoWidth||320;c.height=v.videoHeight||240;
+  c.getContext('2d').drawImage(v,0,0);
+  const url=c.toDataURL('image/jpeg',0.8);
+  const grid=document.getElementById('photoGrid');
+  const mainGrid=document.getElementById('mainPhotoGrid');
+  const thumb=document.createElement('div');
+  thumb.className='photo-thumb';
+  const img=document.createElement('img');
+  img.src=url;thumb.appendChild(img);
+  grid.insertBefore(thumb,grid.firstChild);
+  const thumb2=thumb.cloneNode(true);
+  mainGrid.insertBefore(thumb2,mainGrid.firstChild);
+  addLog('📷','Photo taken of Onyx during exam');
+  sounds.success();showToast('📸 Photo saved to gallery!');
+}
+
+document.getElementById('logInput').addEventListener('keydown',function(e){
+  if(e.key==='Enter'&&this.value.trim()){
+    addLog('📝',this.value.trim());
+    this.value='';
+  }
+});
+
+const today=new Date();
+const dateStr=today.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+document.getElementById('visitDate').value=dateStr;
+document.getElementById('xDate').textContent=today.toLocaleDateString('en-US',{month:'2-digit',day:'2-digit',year:'2-digit'});
+
+document.querySelectorAll('.check-item').forEach(item=>{
+  if(item.querySelector('.check-box').textContent==='✓'){
+    item.querySelector('.check-box').classList.add('checked');
+  }
+});
+
+addLog('🌊','Onyx arrived at the clinic — rescued from Monterey Bay',true);
+addLog('🩺','Initial checkup started by Dr. Juliet D.',true);
+</script>
+</body>
+</html>
