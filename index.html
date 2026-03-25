@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dr. Juliet's Marine Bio Vet Office — Onyx</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>Dr. Juliet's Marine Bio Vet Office</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -13,6 +12,7 @@
   --teal:#00c9a7;--teal-dark:#009e82;--foam:#f0fdfa;
   --text-dark:#0d3341;--text-mid:#2a6678;--text-light:#5fa8bd;
   --warn:#ffb74d;--green:#43d98b;--red:#ff5a5f;
+  --seal:#4a7fa5;--dolphin:#5b6e9e;
 }
 html,body{font-family:'Nunito',sans-serif;background:var(--ocean);color:var(--text-dark);height:100%;overflow:hidden}
 .screen{position:fixed;inset:0;display:none;z-index:10;flex-direction:column}
@@ -20,110 +20,113 @@ html,body{font-family:'Nunito',sans-serif;background:var(--ocean);color:var(--te
 
 /* BUBBLES */
 .bubbles-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none}
-.bubble{position:absolute;border-radius:50%;background:rgba(45,179,212,0.08);animation:rise linear infinite}
-@keyframes rise{0%{transform:translateY(100vh) scale(0);opacity:0}20%{opacity:1}80%{opacity:0.4}100%{transform:translateY(-20vh) scale(1.4);opacity:0}}
+.bubble{position:absolute;border-radius:50%;background:rgba(45,179,212,0.07);animation:rise linear infinite}
+@keyframes rise{0%{transform:translateY(110vh) scale(0);opacity:0}20%{opacity:1}80%{opacity:0.4}100%{transform:translateY(-20vh) scale(1.4);opacity:0}}
 
 /* SIGN-IN */
 #screen-signin{background:linear-gradient(160deg,#062d40,#0a4f6e 50%,#0d6b8a);align-items:center;justify-content:center}
-.signin-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:28px;padding:38px 42px;max-width:400px;width:92%;text-align:center;position:relative;z-index:1}
-.signin-logo{font-size:52px;display:block;margin-bottom:6px}
-.signin-title{font-size:24px;font-weight:900;color:#fff;margin-bottom:3px}
-.signin-sub{font-size:13px;color:var(--ocean-pale);margin-bottom:26px}
-.photo-ring{width:96px;height:96px;border-radius:50%;border:3px dashed rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden;background:rgba(255,255,255,0.08)}
-.photo-ring:hover{border-color:var(--teal);background:rgba(0,201,167,0.12)}
+.signin-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:28px;padding:36px 40px;max-width:400px;width:92%;text-align:center;position:relative;z-index:1}
+.signin-logo{font-size:50px;display:block;margin-bottom:5px}
+.signin-title{font-size:23px;font-weight:900;color:#fff;margin-bottom:3px}
+.signin-sub{font-size:13px;color:var(--ocean-pale);margin-bottom:22px}
+.photo-ring{width:90px;height:90px;border-radius:50%;border:3px dashed rgba(255,255,255,0.38);display:flex;align-items:center;justify-content:center;margin:0 auto 9px;cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden;background:rgba(255,255,255,0.07)}
+.photo-ring:hover{border-color:var(--teal);background:rgba(0,201,167,0.1)}
 .photo-ring img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:none;position:absolute;inset:0}
-.photo-ring span{font-size:30px}
+.photo-ring span{font-size:28px}
 .photo-ring input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.photo-hint{font-size:11px;color:rgba(255,255,255,0.45);margin-bottom:18px}
-.signin-form{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
-.signin-input{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:11px;padding:11px 14px;font-family:'Nunito',sans-serif;font-size:15px;color:#fff;outline:none;width:100%}
-.signin-input::placeholder{color:rgba(255,255,255,0.38)}
+.photo-hint{font-size:11px;color:rgba(255,255,255,0.42);margin-bottom:16px}
+.signin-form{display:flex;flex-direction:column;gap:9px;margin-bottom:16px}
+.signin-input{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:11px;padding:11px 13px;font-family:'Nunito',sans-serif;font-size:15px;color:#fff;outline:none;width:100%}
+.signin-input::placeholder{color:rgba(255,255,255,0.36)}
 .signin-input:focus{border-color:var(--teal)}
 .signin-btn{background:var(--teal);border:none;border-radius:13px;padding:13px;font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;color:#fff;cursor:pointer;width:100%;transition:all 0.2s}
 .signin-btn:hover{background:var(--teal-dark);transform:translateY(-1px)}
-.signin-btn:active{transform:scale(0.98)}
 
 /* HOME */
 #screen-home{background:linear-gradient(160deg,#062d40,#0a4f6e 55%,#0d6b8a);align-items:center;justify-content:center;overflow:hidden}
-.home-inner{position:relative;z-index:1;text-align:center;display:flex;flex-direction:column;align-items:center}
-.home-welcome{font-size:13px;font-weight:700;color:var(--ocean-pale);margin-bottom:4px;letter-spacing:1.5px;text-transform:uppercase}
-.home-title{font-size:30px;font-weight:900;color:#fff;margin-bottom:2px}
-.home-center{font-size:12px;color:var(--ocean-light);margin-bottom:28px}
-.home-badge{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:18px;padding:10px 18px;display:flex;align-items:center;gap:10px;margin-bottom:32px}
-.home-av{width:42px;height:42px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;overflow:hidden;flex-shrink:0}
+.home-inner{position:relative;z-index:1;text-align:center;display:flex;flex-direction:column;align-items:center;padding:10px}
+.home-welcome{font-size:13px;font-weight:700;color:var(--ocean-pale);margin-bottom:3px;letter-spacing:1.5px;text-transform:uppercase}
+.home-title{font-size:28px;font-weight:900;color:#fff;margin-bottom:2px}
+.home-center{font-size:12px;color:var(--ocean-light);margin-bottom:22px}
+.home-badge{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:17px;padding:9px 16px;display:flex;align-items:center;gap:9px;margin-bottom:24px}
+.home-av{width:40px;height:40px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#fff;overflow:hidden;flex-shrink:0}
 .home-av img{width:100%;height:100%;object-fit:cover}
-.home-doc-name{font-size:15px;font-weight:900;color:#fff;text-align:left}
+.home-doc-name{font-size:14px;font-weight:900;color:#fff;text-align:left}
 .home-doc-title{font-size:11px;color:var(--ocean-pale)}
 .status-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);animation:pulse 1.5s infinite;flex-shrink:0}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.3)}}
-.otter-card{cursor:pointer;position:relative;transition:transform 0.2s}
-.otter-card:hover{transform:scale(1.04)}
-.otter-card:active{transform:scale(0.96)}
-.otter-ring{width:190px;height:190px;border-radius:50%;border:4px solid var(--teal);background:rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;font-size:96px;margin:0 auto;position:relative;overflow:hidden;box-shadow:0 0 0 10px rgba(0,201,167,0.12),0 0 0 20px rgba(0,201,167,0.05)}
-.otter-ring img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:none}
-.otter-pulse-ring{position:absolute;inset:-10px;border-radius:50%;border:2px solid rgba(0,201,167,0.35);animation:otterP 2.2s ease-in-out infinite}
-@keyframes otterP{0%,100%{transform:scale(1);opacity:0.5}50%{transform:scale(1.07);opacity:1}}
-.otter-name{font-size:22px;font-weight:900;color:#fff;margin-top:14px}
-.otter-sub{font-size:12px;color:var(--ocean-pale);margin-top:2px}
-.otter-tag{display:inline-block;background:var(--teal);color:#fff;font-size:11px;font-weight:800;padding:4px 14px;border-radius:12px;margin-top:7px}
-.tap-hint{font-size:13px;color:rgba(255,255,255,0.45);margin-top:18px;animation:blink 2.2s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:0.4}50%{opacity:1}}
+
+/* PATIENT SELECT GRID */
+.patient-select-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px}
+.patient-select-card{cursor:pointer;background:rgba(255,255,255,0.08);border:2px solid rgba(255,255,255,0.15);border-radius:20px;padding:18px 12px;text-align:center;transition:all 0.2s;position:relative}
+.patient-select-card:hover{background:rgba(255,255,255,0.15);border-color:var(--teal);transform:translateY(-3px)}
+.patient-select-card:active{transform:scale(0.96)}
+.patient-select-card.active-patient{border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,201,167,0.2)}
+.psc-emoji{font-size:52px;display:block;margin-bottom:7px}
+.psc-name{font-size:15px;font-weight:900;color:#fff}
+.psc-sub{font-size:11px;color:var(--ocean-pale);margin-top:2px}
+.psc-tag{display:inline-block;font-size:10px;font-weight:800;padding:3px 9px;border-radius:10px;margin-top:5px}
+.psc-tag.incare{background:var(--teal);color:#fff}
+.psc-tag.healthy{background:#43d98b;color:#003320}
+.psc-tag.monitoring{background:var(--warn);color:#4a2500}
+.tap-hint{font-size:12px;color:rgba(255,255,255,0.4);animation:blink 2.2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:0.35}50%{opacity:1}}
 
 /* DASHBOARD */
 #screen-dashboard{background:var(--ocean)}
 .water-bar{height:4px;background:linear-gradient(90deg,var(--ocean-light),var(--teal),var(--ocean-light));background-size:200%;animation:water 2s linear infinite;flex-shrink:0}
 @keyframes water{0%{background-position:0%}100%{background-position:200%}}
-.header{background:linear-gradient(135deg,var(--ocean),var(--ocean-mid));padding:9px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--ocean-light);flex-shrink:0}
-.header-brand{display:flex;align-items:center;gap:9px}
-.logo-circle{width:38px;height:38px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:18px;border:2px solid rgba(255,255,255,0.3);flex-shrink:0}
-.header h1{font-size:15px;font-weight:900;color:#fff;line-height:1.1}
+.header{background:linear-gradient(135deg,var(--ocean),var(--ocean-mid));padding:8px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--ocean-light);flex-shrink:0}
+.header-brand{display:flex;align-items:center;gap:8px}
+.logo-circle{width:36px;height:36px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:17px;border:2px solid rgba(255,255,255,0.3);flex-shrink:0}
+.header h1{font-size:14px;font-weight:900;color:#fff;line-height:1.1}
 .header h1 span{font-size:10px;font-weight:600;color:var(--ocean-pale);display:block}
-.hdr-right{display:flex;align-items:center;gap:6px}
-.doc-badge-hdr{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:28px;padding:4px 11px 4px 4px;display:flex;align-items:center;gap:7px;cursor:pointer;transition:background 0.2s}
-.doc-badge-hdr:hover{background:rgba(255,255,255,0.18)}
-.doc-av{width:30px;height:30px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;overflow:hidden;flex-shrink:0;border:2px solid rgba(255,255,255,0.25)}
+.hdr-right{display:flex;align-items:center;gap:5px}
+.doc-badge-hdr{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:26px;padding:4px 10px 4px 4px;display:flex;align-items:center;gap:6px;cursor:pointer;transition:background 0.2s}
+.doc-badge-hdr:hover{background:rgba(255,255,255,0.17)}
+.doc-av{width:28px;height:28px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;overflow:hidden;flex-shrink:0;border:2px solid rgba(255,255,255,0.22)}
 .doc-av img{width:100%;height:100%;object-fit:cover}
-.doc-name{font-size:12px;font-weight:800;color:#fff}
+.doc-name{font-size:11px;font-weight:800;color:#fff}
 .doc-title-sm{font-size:9px;color:var(--ocean-pale)}
-.home-btn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:9px;padding:5px 10px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:#fff;cursor:pointer;transition:background 0.2s}
-.home-btn:hover{background:rgba(255,255,255,0.2)}
+.home-btn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);border-radius:8px;padding:5px 9px;font-family:'Nunito',sans-serif;font-size:11px;font-weight:800;color:#fff;cursor:pointer}
+.home-btn:hover{background:rgba(255,255,255,0.18)}
+.patient-indicator{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);border-radius:8px;padding:4px 9px;font-size:11px;font-weight:800;color:#fff;display:flex;align-items:center;gap:5px}
 
-.main-grid{display:grid;grid-template-columns:196px 1fr 268px;flex:1;overflow:hidden}
+/* MAIN LAYOUT */
+.main-grid{display:grid;grid-template-columns:188px 1fr 310px;flex:1;overflow:hidden}
 
 /* SIDEBAR */
-.sidebar{background:rgba(0,0,0,0.2);border-right:1px solid rgba(255,255,255,0.1);padding:11px 8px;display:flex;flex-direction:column;gap:5px;overflow-y:auto}
-.patient-card{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);border-radius:13px;padding:9px;text-align:center;margin-bottom:3px}
-.otter-emoji{font-size:38px;display:block;margin-bottom:2px}
-.patient-name{font-size:14px;font-weight:900;color:#fff}
-.patient-sub{font-size:11px;color:var(--ocean-pale);margin-top:1px}
-.patient-tag{display:inline-block;background:var(--teal);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:9px;margin-top:3px}
-.nav-section-title{font-size:10px;font-weight:700;color:var(--ocean-light);text-transform:uppercase;letter-spacing:1px;padding:3px 5px}
-.nav-btn{width:100%;background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:9px;padding:8px 9px;text-align:left;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;color:rgba(255,255,255,0.72);transition:all 0.2s}
-.nav-btn:hover,.nav-btn.active{background:rgba(255,255,255,0.14);border-color:rgba(255,255,255,0.28);color:#fff}
+.sidebar{background:rgba(0,0,0,0.2);border-right:1px solid rgba(255,255,255,0.1);padding:10px 7px;display:flex;flex-direction:column;gap:4px;overflow-y:auto}
+.patient-card{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.17);border-radius:12px;padding:8px;text-align:center;margin-bottom:3px}
+.otter-emoji{font-size:34px;display:block;margin-bottom:1px}
+.patient-name{font-size:13px;font-weight:900;color:#fff}
+.patient-sub{font-size:10px;color:var(--ocean-pale);margin-top:1px}
+.patient-tag{display:inline-block;background:var(--teal);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:8px;margin-top:3px}
+.nav-section-title{font-size:9px;font-weight:700;color:var(--ocean-light);text-transform:uppercase;letter-spacing:1px;padding:2px 4px;margin-top:2px}
+.nav-btn{width:100%;background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:7px 8px;text-align:left;cursor:pointer;display:flex;align-items:center;gap:5px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:rgba(255,255,255,0.7);transition:all 0.2s}
+.nav-btn:hover,.nav-btn.active{background:rgba(255,255,255,0.13);border-color:rgba(255,255,255,0.26);color:#fff}
 .nav-btn.active{background:var(--teal);border-color:var(--teal)}
-.nav-icon{font-size:14px;width:17px;text-align:center;flex-shrink:0}
+.nav-icon{font-size:13px;width:16px;text-align:center;flex-shrink:0}
 
 /* CENTER */
-.center-panel{background:var(--foam);overflow-y:auto;padding:13px}
+.center-panel{background:var(--foam);overflow-y:auto;padding:12px}
 .panel-section{display:none}
 .panel-section.active{display:block}
-.section-header{display:flex;align-items:center;gap:7px;margin-bottom:11px}
-.section-header h2{font-size:16px;font-weight:800;color:var(--text-dark)}
-.section-icon{font-size:17px}
-.visit-form{background:#fff;border-radius:13px;padding:13px;border:1px solid #e0f0f5;margin-bottom:11px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
-.form-group{display:flex;flex-direction:column;gap:3px}
-.form-group label{font-size:11px;font-weight:800;color:var(--text-mid);text-transform:uppercase;letter-spacing:0.5px}
-.form-group input,.form-group select,.form-group textarea{border:1.5px solid #c8e8f0;border-radius:8px;padding:7px 10px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--text-dark);background:#f8fdff;outline:none;width:100%;transition:border-color 0.2s}
+.section-header{display:flex;align-items:center;gap:7px;margin-bottom:10px}
+.section-header h2{font-size:15px;font-weight:800;color:var(--text-dark)}
+.section-icon{font-size:16px}
+.visit-form{background:#fff;border-radius:12px;padding:12px;border:1px solid #e0f0f5;margin-bottom:10px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:7px}
+.form-group{display:flex;flex-direction:column;gap:2px}
+.form-group label{font-size:10px;font-weight:800;color:var(--text-mid);text-transform:uppercase;letter-spacing:0.5px}
+.form-group input,.form-group select,.form-group textarea{border:1.5px solid #c8e8f0;border-radius:8px;padding:6px 9px;font-family:'Nunito',sans-serif;font-size:13px;color:var(--text-dark);background:#f8fdff;outline:none;width:100%;transition:border-color 0.2s}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--ocean-light)}
-.form-group textarea{resize:none;height:60px}
+.form-group textarea{resize:none;height:56px}
 .form-group.full{grid-column:span 2}
-
-/* ACTION BUTTONS */
-.action-btns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:11px}
-.action-btn{border:none;border-radius:11px;padding:8px 4px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all 0.15s;position:relative;overflow:hidden}
-.action-btn:active{transform:scale(0.92)}
-.action-btn .btn-icon{font-size:19px}
+.action-btns{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:10px}
+.action-btn{border:none;border-radius:10px;padding:7px 3px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;display:flex;flex-direction:column;align-items:center;gap:2px;transition:all 0.15s;position:relative;overflow:hidden}
+.action-btn:active{transform:scale(0.91)}
+.action-btn .btn-icon{font-size:18px}
 .action-btn.feed{background:linear-gradient(135deg,#43d98b,#00c9a7);color:#004d3a}
 .action-btn.bandage{background:linear-gradient(135deg,#ff9a80,#ff7043);color:#5c1f0d}
 .action-btn.medicine{background:linear-gradient(135deg,#64b5f6,#1e88e5);color:#0a2e5c}
@@ -136,77 +139,134 @@ html,body{font-family:'Nunito',sans-serif;background:var(--ocean);color:var(--te
 @keyframes ripple{from{transform:scale(0);opacity:1}to{transform:scale(3);opacity:0}}
 
 /* VITALS */
-.vitals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:11px}
-.vital-card{background:#fff;border:1px solid #d0eaf5;border-radius:10px;padding:9px;text-align:center}
-.vital-label{font-size:10px;font-weight:700;color:var(--text-light);text-transform:uppercase;margin-bottom:2px}
-.vital-value{font-size:22px;font-weight:900;color:var(--ocean)}
-.vital-unit{font-size:10px;color:var(--text-mid)}
-.vital-status{font-size:10px;font-weight:700;padding:2px 6px;border-radius:6px;margin-top:3px;display:inline-block}
+.vitals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px}
+.vital-card{background:#fff;border:1px solid #d0eaf5;border-radius:10px;padding:8px;text-align:center}
+.vital-label{font-size:9px;font-weight:700;color:var(--text-light);text-transform:uppercase;margin-bottom:1px}
+.vital-value{font-size:20px;font-weight:900;color:var(--ocean)}
+.vital-unit{font-size:9px;color:var(--text-mid)}
+.vital-status{font-size:9px;font-weight:700;padding:2px 5px;border-radius:5px;margin-top:2px;display:inline-block}
 .vital-status.good{background:#e8f5e9;color:#2e7d32}
 .vital-status.warn{background:#fff3e0;color:#e65100}
-.heart-monitor-card{background:#0d1b2a;border-radius:13px;padding:10px;margin-bottom:11px}
-.heart-monitor-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
-.heart-monitor-header span{font-size:12px;font-weight:700;color:#00e676}
-.bpm{font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:#00e676}
-canvas#heartCanvas{width:100%;height:66px;display:block}
+.heart-monitor-card{background:#0d1b2a;border-radius:12px;padding:9px;margin-bottom:10px}
+.heart-monitor-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.heart-monitor-header span{font-size:11px;font-weight:700;color:#00e676}
+.bpm{font-family:'Space Mono',monospace;font-size:16px;font-weight:700;color:#00e676}
+canvas#heartCanvas{width:100%;height:64px;display:block}
+.heart-controls{display:flex;gap:6px;margin-top:7px}
+.heart-timer{font-family:'Space Mono',monospace;font-size:12px;color:#00e676;background:#0d1b2a;border-radius:7px;padding:5px 10px;display:flex;align-items:center;gap:5px}
 
 /* LOG */
-.log-entries{display:flex;flex-direction:column;gap:6px;max-height:270px;overflow-y:auto}
-.log-entry{background:#fff;border:1px solid #e0f0f5;border-radius:10px;padding:8px 10px;display:flex;gap:8px;align-items:flex-start}
-.log-time{font-size:10px;font-weight:700;color:var(--text-light);white-space:nowrap;font-family:'Space Mono',monospace;margin-top:2px}
-.log-text{font-size:13px;color:var(--text-dark);font-weight:600;flex:1}
-.log-icon{font-size:14px;flex-shrink:0}
-.log-empty{text-align:center;padding:26px;color:var(--text-light);font-size:13px;font-weight:700}
+.log-entries{display:flex;flex-direction:column;gap:5px;max-height:240px;overflow-y:auto}
+.log-entry{background:#fff;border:1px solid #e0f0f5;border-radius:9px;padding:7px 9px;display:flex;gap:7px;align-items:flex-start}
+.log-time{font-size:9px;font-weight:700;color:var(--text-light);white-space:nowrap;font-family:'Space Mono',monospace;margin-top:2px}
+.log-text{font-size:12px;color:var(--text-dark);font-weight:600;flex:1}
+.log-icon{font-size:13px;flex-shrink:0}
+.log-empty{text-align:center;padding:22px;color:var(--text-light);font-size:12px;font-weight:700}
 
 /* CAMERA */
-.camera-box{background:#e0f0f8;border:2px dashed var(--ocean-light);border-radius:12px;overflow:hidden;position:relative;min-height:145px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px}
+.camera-box{background:#e0f0f8;border:2px dashed var(--ocean-light);border-radius:11px;overflow:hidden;position:relative;min-height:130px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px}
 .camera-placeholder{text-align:center;color:var(--text-mid)}
-.camera-placeholder span{font-size:30px;display:block;margin-bottom:3px}
-.camera-placeholder p{font-size:13px;font-weight:700}
-.snap-overlay{position:absolute;bottom:7px;right:7px;display:flex;gap:5px}
+.camera-placeholder span{font-size:28px;display:block;margin-bottom:3px}
+.camera-placeholder p{font-size:12px;font-weight:700}
+.snap-overlay{position:absolute;bottom:6px;right:6px;display:flex;gap:5px}
+
+/* AI DOCTOR */
+.ai-doctor-panel{background:linear-gradient(135deg,#0d1b2a,#1a2e42);border-radius:12px;padding:12px;margin-bottom:10px;border:1px solid rgba(0,201,167,0.3)}
+.ai-doctor-header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.ai-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--ocean-light));display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;animation:aiPulse 3s ease-in-out infinite}
+@keyframes aiPulse{0%,100%{box-shadow:0 0 0 0 rgba(0,201,167,0.4)}50%{box-shadow:0 0 0 8px rgba(0,201,167,0)}}
+.ai-doctor-title{font-size:12px;font-weight:800;color:var(--teal)}
+.ai-doctor-sub{font-size:10px;color:rgba(255,255,255,0.5)}
+.ai-message-bubble{background:rgba(0,201,167,0.1);border:1px solid rgba(0,201,167,0.25);border-radius:12px;border-top-left-radius:3px;padding:10px 12px;margin-bottom:9px;min-height:52px;position:relative}
+.ai-message-text{font-size:13px;color:#e0f7fc;font-weight:600;line-height:1.5}
+.ai-typing{display:none;gap:4px;align-items:center;margin-top:5px}
+.ai-typing.show{display:flex}
+.ai-typing span{width:5px;height:5px;border-radius:50%;background:var(--teal);animation:dot 1.2s infinite}
+.ai-typing span:nth-child(2){animation-delay:0.2s}
+.ai-typing span:nth-child(3){animation-delay:0.4s}
+@keyframes dot{0%,100%{opacity:0.3;transform:scale(0.8)}50%{opacity:1;transform:scale(1.2)}}
+.ai-btn-row{display:flex;gap:6px}
+
+/* VIDEOS */
+.video-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.video-card{background:#fff;border:1px solid #d0eaf5;border-radius:12px;overflow:hidden;cursor:pointer;transition:all 0.2s}
+.video-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(10,79,110,0.15)}
+.video-thumb{background:linear-gradient(135deg,var(--ocean),var(--ocean-mid));height:90px;display:flex;align-items:center;justify-content:center;font-size:36px;position:relative}
+.video-play-icon{position:absolute;width:36px;height:36px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px}
+.video-info{padding:8px 10px}
+.video-title{font-size:12px;font-weight:800;color:var(--text-dark);margin-bottom:2px}
+.video-source{font-size:10px;color:var(--text-light);font-weight:700}
+.video-age{font-size:10px;background:var(--ocean-pale);color:var(--ocean);padding:1px 6px;border-radius:6px;display:inline-block;margin-top:2px;font-weight:700}
+.video-modal{display:none;position:fixed;inset:0;background:rgba(0,20,40,0.88);z-index:300;align-items:center;justify-content:center;flex-direction:column;gap:10px}
+.video-modal.open{display:flex}
+.video-modal-inner{background:#0d1b2a;border-radius:18px;padding:18px;width:90%;max-width:640px}
+.video-modal-title{font-size:16px;font-weight:900;color:#fff;margin-bottom:4px}
+.video-modal-src{font-size:11px;color:var(--teal);margin-bottom:10px}
+.video-iframe-wrap{background:#000;border-radius:10px;overflow:hidden;position:relative;padding-bottom:56.25%;height:0}
+.video-iframe-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+.video-modal-close{background:var(--teal);border:none;border-radius:10px;padding:9px 20px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:#fff;cursor:pointer;margin-top:4px}
 
 /* RIGHT PANEL */
 .right-panel{background:#fff;border-left:1px solid #d0eaf5;overflow-y:auto;display:flex;flex-direction:column}
+
+/* BIGGER X-RAY */
 .xray-panel{padding:11px;border-bottom:1px solid #e8f4f8}
-.xray-label{font-size:11px;font-weight:800;color:var(--text-mid);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.xray-label{font-size:10px;font-weight:800;color:var(--text-mid);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
 .xray-box{background:#0a0f1a;border-radius:10px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}
-.xray-overlay{position:absolute;top:5px;left:5px;font-size:8px;font-family:'Space Mono',monospace;color:#00e676;opacity:0.85;line-height:1.7;pointer-events:none;z-index:2}
+.xray-overlay{position:absolute;top:5px;left:5px;font-size:7.5px;font-family:'Space Mono',monospace;color:#00e676;opacity:0.85;line-height:1.7;pointer-events:none;z-index:2}
 .scan-line{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#00e676,transparent);animation:scanAnim 3.2s linear infinite;display:none;z-index:3}
 @keyframes scanAnim{from{top:0}to{top:100%}}
-.checklist-panel{padding:11px;border-bottom:1px solid #e8f4f8;flex:1}
-.check-item{display:flex;align-items:center;gap:6px;padding:6px 0;border-bottom:1px solid #f0f8fb;cursor:pointer}
+
+/* AI DOCTOR TEXT NOTIFICATION */
+.ai-text-popup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.85);opacity:0;background:linear-gradient(135deg,#0d1b2a,#1a3050);border:2px solid var(--teal);border-radius:22px;padding:22px 26px;max-width:420px;width:90%;z-index:500;transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;text-align:center}
+.ai-text-popup.show{opacity:1;transform:translate(-50%,-50%) scale(1);pointer-events:auto}
+.ai-text-popup-icon{font-size:38px;margin-bottom:8px;display:block}
+.ai-text-popup-from{font-size:11px;font-weight:700;color:var(--teal);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
+.ai-text-popup-msg{font-size:16px;font-weight:800;color:#fff;line-height:1.5;margin-bottom:12px}
+.ai-text-popup-dismiss{background:var(--teal);border:none;border-radius:10px;padding:8px 20px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:#fff;cursor:pointer}
+
+/* CHECKLIST */
+.checklist-panel{padding:11px;border-bottom:1px solid #e8f4f8}
+.check-item{display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid #f0f8fb;cursor:pointer}
 .check-item:last-child{border-bottom:none}
-.check-box{width:19px;height:19px;border-radius:5px;border:2px solid var(--ocean-light);display:flex;align-items:center;justify-content:center;font-size:11px;transition:all 0.2s;flex-shrink:0}
+.check-box{width:18px;height:18px;border-radius:5px;border:2px solid var(--ocean-light);display:flex;align-items:center;justify-content:center;font-size:10px;transition:all 0.2s;flex-shrink:0}
 .check-box.checked{background:var(--teal);border-color:var(--teal);color:#fff}
-.check-label{font-size:13px;font-weight:700;color:var(--text-dark);flex:1}
-.check-status{font-size:10px;font-weight:700;padding:2px 6px;border-radius:7px;white-space:nowrap}
+.check-label{font-size:12px;font-weight:700;color:var(--text-dark);flex:1}
+.check-status{font-size:9px;font-weight:700;padding:1px 6px;border-radius:6px;white-space:nowrap}
 .check-status.ok{background:#e8f5e9;color:#2e7d32}
 .check-status.pending{background:#e3f2fd;color:#1565c0}
-.photo-strip{padding:9px 11px}
-.photo-strip-label{font-size:11px;font-weight:800;color:var(--text-mid);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
-.photos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
-.photo-thumb{background:#e0f0f8;border-radius:7px;aspect-ratio:1;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:17px}
+
+/* PHOTO STRIP */
+.photo-strip{padding:9px 10px}
+.photo-strip-label{font-size:10px;font-weight:800;color:var(--text-mid);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}
+.photos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.photo-thumb{background:#e0f0f8;border-radius:6px;aspect-ratio:1;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:16px}
 .photo-thumb img{width:100%;height:100%;object-fit:cover}
 
 /* BUTTONS */
-.btn{border:none;border-radius:9px;padding:7px 12px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;transition:all 0.2s}
+.btn{border:none;border-radius:8px;padding:6px 11px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;transition:all 0.2s}
 .btn-teal{background:var(--teal);color:#fff}
 .btn-teal:hover{background:var(--teal-dark)}
 .btn-ghost{background:transparent;border:1.5px solid var(--ocean-light);color:var(--ocean)}
 .btn-red{background:var(--red);color:#fff}
-.btn-sm{padding:5px 10px;font-size:12px}
+.btn-sm{padding:5px 10px;font-size:11px}
+.btn-stop{background:#ff5a5f;color:#fff}
 
-.toast{position:fixed;bottom:16px;right:16px;background:var(--ocean);color:#fff;padding:9px 15px;border-radius:10px;font-size:13px;font-weight:700;transform:translateY(100px);opacity:0;transition:all 0.3s;z-index:999;border-left:4px solid var(--teal);max-width:230px}
-.toast.show{transform:translateY(0);opacity:1}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,40,60,0.7);z-index:200;align-items:center;justify-content:center}
+/* BIG TOAST */
+.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.8);opacity:0;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);z-index:400;pointer-events:none;background:linear-gradient(135deg,var(--ocean),var(--ocean-mid));color:#fff;padding:18px 28px;border-radius:18px;font-size:17px;font-weight:800;border-left:5px solid var(--teal);max-width:360px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.4)}
+.toast.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+
+/* MODAL */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,40,60,0.72);z-index:200;align-items:center;justify-content:center}
 .modal.open{display:flex}
-.modal-box{background:#fff;border-radius:19px;padding:22px;max-width:340px;width:90%;text-align:center}
-.modal-box h3{font-size:17px;font-weight:900;color:var(--text-dark);margin-bottom:6px}
-.modal-box p{font-size:13px;color:var(--text-mid);margin-bottom:13px;line-height:1.5}
-.modal-btns{display:flex;gap:8px;justify-content:center}
-::-webkit-scrollbar{width:4px}
+.modal-box{background:#fff;border-radius:18px;padding:20px;max-width:330px;width:90%;text-align:center}
+.modal-box h3{font-size:16px;font-weight:900;color:var(--text-dark);margin-bottom:5px}
+.modal-box p{font-size:12px;color:var(--text-mid);margin-bottom:12px;line-height:1.5}
+.modal-btns{display:flex;gap:7px;justify-content:center}
+
+::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--ocean-light);border-radius:4px}
+::-webkit-scrollbar-thumb{background:var(--ocean-light);border-radius:3px}
 </style>
 </head>
 <body>
@@ -247,14 +307,27 @@ canvas#heartCanvas{width:100%;height:66px;display:block}
       </div>
       <div class="status-dot" style="margin-left:8px"></div>
     </div>
-    <div class="otter-card" onclick="goDash()">
-      <div class="otter-pulse-ring"></div>
-      <div class="otter-ring" id="otterRing"><img id="otterImg" alt="Onyx"><span id="otterMoji">🦦</span></div>
-      <div class="otter-name">Onyx</div>
-      <div class="otter-sub">Sea Otter · Female · Monterey Bay</div>
-      <div class="otter-tag">In Care ✦</div>
+    <div class="patient-select-grid">
+      <div class="patient-select-card active-patient" onclick="selectPatient('onyx')">
+        <span class="psc-emoji">🦦</span>
+        <div class="psc-name">Onyx</div>
+        <div class="psc-sub">Sea Otter · Female</div>
+        <div class="psc-tag incare">In Care ✦</div>
+      </div>
+      <div class="patient-select-card" onclick="selectPatient('pearl')">
+        <span class="psc-emoji">🦭</span>
+        <div class="psc-name">Pearl</div>
+        <div class="psc-sub">Harbor Seal · Male</div>
+        <div class="psc-tag monitoring">Monitoring</div>
+      </div>
+      <div class="patient-select-card" onclick="selectPatient('echo')">
+        <span class="psc-emoji">🐬</span>
+        <div class="psc-name">Echo</div>
+        <div class="psc-sub">Dolphin · Female</div>
+        <div class="psc-tag healthy">Healthy ✓</div>
+      </div>
     </div>
-    <div class="tap-hint">👆 Tap Onyx to open her chart</div>
+    <div class="tap-hint">👆 Tap a patient to open their chart</div>
   </div>
 </div>
 
@@ -267,10 +340,11 @@ canvas#heartCanvas{width:100%;height:66px;display:block}
       <div><h1>Marine Bio Vet Office <span>Monterey Bay Rescue Center</span></h1></div>
     </div>
     <div class="hdr-right">
+      <div class="patient-indicator" id="patientIndicator">🦦 Onyx</div>
       <div class="doc-badge-hdr" onclick="showScreen('home')">
         <div class="status-dot"></div>
         <div class="doc-av" id="dAv">JD</div>
-        <div><div class="doc-name" id="dName">Dr. Juliet D.</div><div class="doc-title-sm" id="dTitle">Marine Biologist &amp; Vet</div></div>
+        <div><div class="doc-name" id="dName">Dr. Juliet D.</div><div class="doc-title-sm" id="dTitle">Marine Biologist</div></div>
       </div>
       <button class="home-btn" onclick="showScreen('home')">🏠 Home</button>
     </div>
@@ -278,20 +352,22 @@ canvas#heartCanvas{width:100%;height:66px;display:block}
   <div class="main-grid">
     <!-- SIDEBAR -->
     <div class="sidebar">
-      <div class="patient-card">
-        <span class="otter-emoji">🦦</span>
-        <div class="patient-name">Onyx</div>
-        <div class="patient-sub">Sea Otter · Female</div>
-        <div class="patient-sub" style="font-size:10px">Monterey Bay Rescue</div>
-        <div class="patient-tag">In Care ✦</div>
+      <div class="patient-card" id="sidePatientCard">
+        <span class="otter-emoji" id="sideEmoji">🦦</span>
+        <div class="patient-name" id="sideName">Onyx</div>
+        <div class="patient-sub" id="sideSpecies">Sea Otter · Female</div>
+        <div class="patient-sub" style="font-size:9px">Monterey Bay Rescue</div>
+        <div class="patient-tag" id="sideTag">In Care ✦</div>
       </div>
       <div class="nav-section-title">Office</div>
       <button class="nav-btn active" onclick="showPanel('visit',this)"><span class="nav-icon">📋</span>Today's Visit</button>
       <button class="nav-btn" onclick="showPanel('vitals',this)"><span class="nav-icon">💓</span>Vitals &amp; Monitor</button>
+      <button class="nav-btn" onclick="showPanel('ai',this)"><span class="nav-icon">🤖</span>AI Doctor</button>
       <button class="nav-btn" onclick="showPanel('log',this)"><span class="nav-icon">📓</span>Daily Log</button>
       <button class="nav-btn" onclick="showPanel('camera',this)"><span class="nav-icon">📷</span>Patient Photo</button>
-      <div class="nav-section-title" style="margin-top:5px">Quick Actions</div>
-      <button class="nav-btn" onclick="doAction('feed')"><span class="nav-icon">🐟</span>Feed Onyx</button>
+      <button class="nav-btn" onclick="showPanel('videos',this)"><span class="nav-icon">🎬</span>Learn Videos</button>
+      <div class="nav-section-title">Quick Actions</div>
+      <button class="nav-btn" onclick="doAction('feed')"><span class="nav-icon">🐟</span>Feed Patient</button>
       <button class="nav-btn" onclick="doAction('bandage')"><span class="nav-icon">🩹</span>Check Bandage</button>
       <button class="nav-btn" onclick="doAction('medicine')"><span class="nav-icon">💊</span>Give Medicine</button>
       <button class="nav-btn" onclick="doAction('sleep')"><span class="nav-icon">😴</span>Rest Time</button>
@@ -300,6 +376,7 @@ canvas#heartCanvas{width:100%;height:66px;display:block}
 
     <!-- CENTER -->
     <div class="center-panel">
+
       <!-- VISIT -->
       <div id="panel-visit" class="panel-section active">
         <div class="section-header"><span class="section-icon">📋</span><h2>Today's Appointment</h2></div>
@@ -310,11 +387,11 @@ canvas#heartCanvas{width:100%;height:66px;display:block}
             <div class="form-group"><label>Animal Type</label>
               <select id="animalType"><option>Sea Otter</option><option>Harbor Seal</option><option>Dolphin</option><option>Sea Turtle</option></select>
             </div>
-            <div class="form-group"><label>Weight (lbs)</label><input type="number" id="weight" value="28" min="1" max="200"></div>
+            <div class="form-group"><label>Weight (lbs)</label><input type="number" id="weight" value="28" min="1" max="500"></div>
             <div class="form-group full"><label>Reason for Visit</label><textarea id="reason">Routine checkup and bandage change on left flipper</textarea></div>
             <div class="form-group full"><label>Doctor's Notes</label><textarea id="notes" placeholder="Write your notes here..."></textarea></div>
           </div>
-          <div style="display:flex;gap:7px;justify-content:flex-end">
+          <div style="display:flex;gap:6px;justify-content:flex-end">
             <button class="btn btn-ghost btn-sm" onclick="clearForm()">Clear</button>
             <button class="btn btn-teal btn-sm" onclick="saveVisit()">💾 Save Visit</button>
           </div>
@@ -337,33 +414,69 @@ canvas#heartCanvas{width:100%;height:66px;display:block}
         <div class="section-header"><span class="section-icon">💓</span><h2>Vitals Monitor</h2></div>
         <div class="heart-monitor-card">
           <div class="heart-monitor-header">
-            <span>♥ HEART MONITOR — ONYX</span>
+            <span>♥ HEART MONITOR — <span id="hmonName">ONYX</span></span>
             <span class="bpm"><span id="bpmNum">62</span> BPM</span>
           </div>
-          <canvas id="heartCanvas" width="600" height="66"></canvas>
+          <canvas id="heartCanvas" width="600" height="64"></canvas>
+          <div class="heart-controls">
+            <button class="btn btn-teal btn-sm" id="heartStartBtn" onclick="startHeartMonitor()">▶ Start Monitor</button>
+            <button class="btn btn-stop btn-sm" id="heartStopBtn" onclick="stopHeartMonitor()" style="display:none">⏹ Stop</button>
+            <div class="heart-timer" id="heartTimer" style="display:none">⏱ <span id="heartTimerNum">20</span>s</div>
+          </div>
         </div>
         <div class="vitals-grid">
           <div class="vital-card"><div class="vital-label">Heart Rate</div><div class="vital-value" id="hrVal">62</div><div class="vital-unit">beats/min</div><div class="vital-status good">Normal ✓</div></div>
           <div class="vital-card"><div class="vital-label">Temperature</div><div class="vital-value" id="tempVal">101.3</div><div class="vital-unit">°F</div><div class="vital-status good">Normal ✓</div></div>
           <div class="vital-card"><div class="vital-label">Oxygen</div><div class="vital-value" id="o2Val">97</div><div class="vital-unit">% SpO2</div><div class="vital-status good">Good ✓</div></div>
-          <div class="vital-card"><div class="vital-label">Weight</div><div class="vital-value">28</div><div class="vital-unit">lbs</div><div class="vital-status warn">Low range</div></div>
+          <div class="vital-card"><div class="vital-label">Weight</div><div class="vital-value" id="vWeight">28</div><div class="vital-unit">lbs</div><div class="vital-status warn">Low range</div></div>
           <div class="vital-card"><div class="vital-label">Resp. Rate</div><div class="vital-value">18</div><div class="vital-unit">breaths/min</div><div class="vital-status good">Normal ✓</div></div>
-          <div class="vital-card"><div class="vital-label">Recovery</div><div class="vital-value">73</div><div class="vital-unit">%</div><div class="vital-status good">On track ✓</div></div>
+          <div class="vital-card"><div class="vital-label">Recovery</div><div class="vital-value" id="vRecovery">73</div><div class="vital-unit">%</div><div class="vital-status good">On track ✓</div></div>
         </div>
-        <div style="display:flex;gap:7px">
+        <div style="display:flex;gap:6px">
           <button class="btn btn-teal btn-sm" onclick="updateVitals()">🔄 Refresh Vitals</button>
           <button class="btn btn-ghost btn-sm" onclick="doAction('scan')">📡 Run Scan</button>
+        </div>
+      </div>
+
+      <!-- AI DOCTOR -->
+      <div id="panel-ai" class="panel-section">
+        <div class="section-header"><span class="section-icon">🤖</span><h2>AI Doctor Assistant</h2></div>
+        <div class="ai-doctor-panel">
+          <div class="ai-doctor-header">
+            <div class="ai-avatar">🤖</div>
+            <div>
+              <div class="ai-doctor-title">Dr. Marina AI</div>
+              <div class="ai-doctor-sub">Your smart vet helper • Always here to guide you!</div>
+            </div>
+          </div>
+          <div class="ai-message-bubble">
+            <div class="ai-message-text" id="aiMessageText">Hi Dr. Juliet! 👋 I'm Dr. Marina, your AI assistant. Press the button below and I'll send you a special task to help care for your patient today!</div>
+            <div class="ai-typing" id="aiTyping">
+              <span></span><span></span><span></span>
+              <span style="font-size:10px;color:rgba(255,255,255,0.5);margin-left:4px">Dr. Marina is thinking...</span>
+            </div>
+          </div>
+          <div class="ai-btn-row">
+            <button class="btn btn-teal btn-sm" onclick="getAIPrompt()" style="flex:1">📨 Get New Task from Dr. Marina!</button>
+            <button class="btn btn-ghost btn-sm" onclick="aiTextPopup(currentAiMsg)" style="font-size:10px">🔔 Pop-up!</button>
+          </div>
+        </div>
+        <div style="background:#fff;border-radius:11px;padding:11px;border:1px solid #e0f0f5">
+          <div style="font-size:11px;font-weight:800;color:var(--text-mid);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">📋 Today's Task History</div>
+          <div id="aiTaskList" style="display:flex;flex-direction:column;gap:5px">
+            <div style="font-size:12px;color:var(--text-light);padding:10px;text-align:center">No tasks yet — get your first task from Dr. Marina! 🤖</div>
+          </div>
         </div>
       </div>
 
       <!-- LOG -->
       <div id="panel-log" class="panel-section">
         <div class="section-header"><span class="section-icon">📓</span><h2>Daily Care Log</h2></div>
-        <div style="display:flex;gap:7px;margin-bottom:9px">
-          <input type="text" id="logInput" placeholder="Write a log entry..." style="flex:1;border:1.5px solid #c8e8f0;border-radius:8px;padding:8px 10px;font-family:'Nunito',sans-serif;font-size:14px;outline:none">
+        <div style="display:flex;gap:6px;margin-bottom:8px">
+          <input type="text" id="logInput" placeholder="Write a log entry..." style="flex:1;border:1.5px solid #c8e8f0;border-radius:8px;padding:7px 9px;font-family:'Nunito',sans-serif;font-size:13px;outline:none">
           <button class="btn btn-teal" onclick="addLog('📝',document.getElementById('logInput').value)">Add</button>
         </div>
-        <div id="logList" class="log-entries"><div class="log-empty">No entries yet! Feed Onyx or check her bandage 🦦</div></div>
+        <div id="logList" class="log-entries"><div class="log-empty">No entries yet — start your day! 🦦</div></div>
       </div>
 
       <!-- CAMERA -->
@@ -371,148 +484,149 @@ canvas#heartCanvas{width:100%;height:66px;display:block}
         <div class="section-header"><span class="section-icon">📷</span><h2>Patient Photo</h2></div>
         <div class="camera-box" id="cameraBox">
           <div class="camera-placeholder" id="camPlaceholder"><span>📷</span><p>Click Open Camera to start!</p></div>
-          <video id="camVideo" autoplay playsinline style="display:none;width:100%;border-radius:10px"></video>
+          <video id="camVideo" autoplay playsinline style="display:none;width:100%;border-radius:9px"></video>
           <canvas id="snapCanvas" style="display:none"></canvas>
           <div class="snap-overlay" id="snapOverlay" style="display:none">
             <button class="btn btn-red btn-sm" onclick="stopCamera()">✕ Stop</button>
             <button class="btn btn-teal btn-sm" onclick="takePhoto()">📸 Snap!</button>
           </div>
         </div>
-        <div style="margin-top:8px;display:flex;gap:7px">
+        <div style="margin-top:7px;display:flex;gap:6px">
           <button class="btn btn-teal btn-sm" onclick="startCamera()">📷 Open Camera</button>
         </div>
-        <div style="margin-top:9px">
+        <div style="margin-top:8px">
           <div class="photo-strip-label">Saved Photos</div>
           <div class="photos-grid" id="photoGrid">
             <div class="photo-thumb">🦦</div><div class="photo-thumb">🌊</div><div class="photo-thumb">➕</div>
           </div>
         </div>
       </div>
+
+      <!-- LEARN VIDEOS -->
+      <div id="panel-videos" class="panel-section">
+        <div class="section-header"><span class="section-icon">🎬</span><h2>Learn About Marine Animals</h2></div>
+        <div style="background:linear-gradient(135deg,var(--ocean),var(--ocean-mid));border-radius:12px;padding:11px;margin-bottom:11px;display:flex;align-items:center;gap:10px">
+          <span style="font-size:28px">🎓</span>
+          <div>
+            <div style="font-size:13px;font-weight:800;color:#fff">Educational Videos for Young Vets!</div>
+            <div style="font-size:11px;color:var(--ocean-pale)">All videos are from trusted kids' science websites</div>
+          </div>
+        </div>
+        <div style="font-size:11px;font-weight:800;color:var(--text-mid);text-transform:uppercase;letter-spacing:1px;margin-bottom:7px">🦦 Sea Otters</div>
+        <div class="video-grid" style="margin-bottom:12px">
+          <div class="video-card" onclick="openVideo('https://www.youtube.com/embed/z7KAjJ-b4eU','Sea Otter Habitat &amp; Life — National Geographic Kids','National Geographic Kids','Ages 6+')">
+            <div class="video-thumb" style="background:linear-gradient(135deg,#0a5a6e,#1a8a9a)"><span style="font-size:40px">🦦</span><div class="video-play-icon">▶</div></div>
+            <div class="video-info"><div class="video-title">Sea Otter Facts for Kids</div><div class="video-source">National Geographic Kids</div><div class="video-age">Ages 6+</div></div>
+          </div>
+          <div class="video-card" onclick="openVideo('https://www.youtube.com/embed/EPKjK2M-Hts','Sea Otter Mom &amp; Pup — Monterey Bay Aquarium','Monterey Bay Aquarium','Ages 5+')">
+            <div class="video-thumb" style="background:linear-gradient(135deg,#1a6a5e,#2aaa8a)"><span style="font-size:40px">🌊</span><div class="video-play-icon">▶</div></div>
+            <div class="video-info"><div class="video-title">Otter Mom &amp; Pup at the Aquarium</div><div class="video-source">Monterey Bay Aquarium</div><div class="video-age">Ages 5+</div></div>
+          </div>
+        </div>
+        <div style="font-size:11px;font-weight:800;color:var(--text-mid);text-transform:uppercase;letter-spacing:1px;margin-bottom:7px">🦭 Harbor Seals</div>
+        <div class="video-grid" style="margin-bottom:12px">
+          <div class="video-card" onclick="openVideo('https://www.youtube.com/embed/GaVTFCvZhDU','Harbor Seal Facts — San Diego Zoo Kids','San Diego Zoo Kids','Ages 6+')">
+            <div class="video-thumb" style="background:linear-gradient(135deg,#1a3a6e,#2a5aaa)"><span style="font-size:40px">🦭</span><div class="video-play-icon">▶</div></div>
+            <div class="video-info"><div class="video-title">All About Harbor Seals</div><div class="video-source">San Diego Zoo Kids</div><div class="video-age">Ages 6+</div></div>
+          </div>
+          <div class="video-card" onclick="openVideo('https://www.youtube.com/embed/6q5aQUG2q-k','Seals for Kids — Kids Learning Tube','Kids Learning Tube','Ages 5+')">
+            <div class="video-thumb" style="background:linear-gradient(135deg,#2a3a7e,#4a5aaa)"><span style="font-size:40px">🌊</span><div class="video-play-icon">▶</div></div>
+            <div class="video-info"><div class="video-title">Seals — Ocean Animal Learning</div><div class="video-source">Kids Learning Tube</div><div class="video-age">Ages 5+</div></div>
+          </div>
+        </div>
+        <div style="font-size:11px;font-weight:800;color:var(--text-mid);text-transform:uppercase;letter-spacing:1px;margin-bottom:7px">🐬 Dolphins</div>
+        <div class="video-grid" style="margin-bottom:12px">
+          <div class="video-card" onclick="openVideo('https://www.youtube.com/embed/iySmYMsWA2I','Dolphin Facts for Kids — National Geographic','National Geographic Kids','Ages 6+')">
+            <div class="video-thumb" style="background:linear-gradient(135deg,#1a4a7e,#3a7aaa)"><span style="font-size:40px">🐬</span><div class="video-play-icon">▶</div></div>
+            <div class="video-info"><div class="video-title">Dolphin Facts for Kids</div><div class="video-source">National Geographic Kids</div><div class="video-age">Ages 6+</div></div>
+          </div>
+          <div class="video-card" onclick="openVideo('https://www.youtube.com/embed/zPsLbr7ykBk','How Dolphins Communicate — DK Find Out','DK Find Out','Ages 7+')">
+            <div class="video-thumb" style="background:linear-gradient(135deg,#2a4a8e,#4a6aaa)"><span style="font-size:40px">💙</span><div class="video-play-icon">▶</div></div>
+            <div class="video-info"><div class="video-title">How Dolphins Talk &amp; Swim</div><div class="video-source">DK Find Out Science</div><div class="video-age">Ages 7+</div></div>
+          </div>
+        </div>
+        <div style="font-size:11px;font-weight:800;color:var(--text-mid);text-transform:uppercase;letter-spacing:1px;margin-bottom:7px">🩺 Being a Marine Vet</div>
+        <div class="video-grid">
+          <div class="video-card" onclick="openVideo('https://www.youtube.com/embed/cNYOMHhwxes','What is a Marine Biologist? — Kids Career Week','Kids Career Week','Ages 6+')">
+            <div class="video-thumb" style="background:linear-gradient(135deg,#4a2a7e,#7a4aaa)"><span style="font-size:40px">👩‍⚕️</span><div class="video-play-icon">▶</div></div>
+            <div class="video-info"><div class="video-title">What Does a Marine Vet Do?</div><div class="video-source">Kids Career Week</div><div class="video-age">Ages 6+</div></div>
+          </div>
+          <div class="video-card" onclick="openVideo('https://www.youtube.com/embed/2AKEJpJGIrs','Ocean Animals 101 — SciShow Kids','SciShow Kids','Ages 5+')">
+            <div class="video-thumb" style="background:linear-gradient(135deg,#0a5a4e,#1a8a7a)"><span style="font-size:40px">🔬</span><div class="video-play-icon">▶</div></div>
+            <div class="video-info"><div class="video-title">Ocean Animals Science 101</div><div class="video-source">SciShow Kids</div><div class="video-age">Ages 5+</div></div>
+          </div>
+        </div>
+      </div>
+
     </div><!-- /center -->
 
     <!-- RIGHT PANEL -->
     <div class="right-panel">
       <div class="xray-panel">
-        <div class="xray-label">X-Ray Viewer — Onyx</div>
-        <div class="xray-box" id="xrayBox">
-          <div class="xray-overlay">PATIENT: ONYX<br>SEA OTTER (F)<br>WT: 28 LBS<br>DATE: <span id="xDate"></span><br>DR. <span id="xDr">JULIET D.</span></div>
+        <div class="xray-label">X-Ray Viewer — <span id="xrayPatientName">Onyx</span></div>
+        <div class="xray-box" id="xrayBox" style="min-height:270px">
+          <div class="xray-overlay">PATIENT: <span id="xName">ONYX</span><br>SPECIES: <span id="xSpecies">SEA OTTER (F)</span><br>WT: <span id="xWt">28</span> LBS<br>DATE: <span id="xDate"></span><br>DR. <span id="xDr">JULIET D.</span></div>
           <div class="scan-line" id="scanLine"></div>
-          <svg viewBox="0 0 268 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:220px;display:block">
-            <rect width="268" height="220" fill="#0a0f1a"/>
-            <!-- subtle grid -->
-            <g stroke="#152535" stroke-width="0.4"><line x1="0" y1="44" x2="268" y2="44"/><line x1="0" y1="88" x2="268" y2="88"/><line x1="0" y1="132" x2="268" y2="132"/><line x1="0" y1="176" x2="268" y2="176"/><line x1="67" y1="0" x2="67" y2="220"/><line x1="134" y1="0" x2="134" y2="220"/><line x1="201" y1="0" x2="201" y2="220"/></g>
-            <!-- SKULL: cranium -->
-            <ellipse cx="134" cy="22" rx="22" ry="16" fill="#172f42" stroke="#80d0e8" stroke-width="1.1" opacity="0.95"/>
-            <!-- eye sockets -->
-            <ellipse cx="125" cy="21" rx="5.5" ry="4.5" fill="#0b1d2c" stroke="#5abcd4" stroke-width="0.9" opacity="0.95"/>
-            <ellipse cx="143" cy="21" rx="5.5" ry="4.5" fill="#0b1d2c" stroke="#5abcd4" stroke-width="0.9" opacity="0.95"/>
-            <!-- nasal -->
-            <path d="M129 28 Q134 32 139 28" fill="none" stroke="#7ecce0" stroke-width="0.9" opacity="0.85"/>
-            <line x1="134" y1="28" x2="134" y2="33" stroke="#6abccc" stroke-width="0.8" opacity="0.75"/>
-            <!-- zygomatic arches -->
-            <path d="M112 22 Q113 27 119 29" fill="none" stroke="#5ab0c8" stroke-width="0.9" opacity="0.75"/>
-            <path d="M156 22 Q155 27 149 29" fill="none" stroke="#5ab0c8" stroke-width="0.9" opacity="0.75"/>
-            <!-- mandible -->
-            <path d="M120 32 Q134 43 148 32 Q152 38 148 43 Q134 48 120 43 Q116 38 120 32Z" fill="#132840" stroke="#5ab8d0" stroke-width="0.9" opacity="0.9"/>
-            <!-- teeth: sea otters have flat molars for crushing shellfish -->
-            <rect x="125" y="41" width="4" height="4" rx="1" fill="#90dcea" opacity="0.8"/><rect x="130" y="41" width="4" height="4" rx="1" fill="#90dcea" opacity="0.8"/>
-            <rect x="135" y="41" width="4" height="4" rx="1" fill="#90dcea" opacity="0.8"/><rect x="140" y="41" width="4" height="4" rx="1" fill="#90dcea" opacity="0.8"/>
-            <!-- CERVICAL SPINE 7 vertebrae -->
-            <g fill="#132840" stroke="#6abccc" stroke-width="0.75" opacity="0.9">
-              <rect x="130" y="47" width="8" height="5.5" rx="1.2"/><rect x="130" y="53.5" width="8" height="5.5" rx="1.2"/>
-              <rect x="130" y="60" width="8" height="5.5" rx="1.2"/><rect x="130" y="66.5" width="8" height="5.5" rx="1.2"/>
-              <rect x="130" y="73" width="8" height="5.5" rx="1.2"/><rect x="130" y="79.5" width="8" height="5.5" rx="1.2"/>
-              <rect x="130" y="86" width="8" height="5.5" rx="1.2"/>
-            </g>
-            <!-- spinous processes -->
-            <g stroke="#4aa0b8" stroke-width="0.6" opacity="0.6">
-              <line x1="134" y1="47" x2="134" y2="45"/><line x1="134" y1="53.5" x2="134" y2="51.5"/>
-              <line x1="134" y1="60" x2="134" y2="58"/><line x1="134" y1="66.5" x2="134" y2="64.5"/>
-              <line x1="134" y1="73" x2="134" y2="71"/><line x1="134" y1="79.5" x2="134" y2="77.5"/>
-              <line x1="134" y1="86" x2="134" y2="84"/>
-            </g>
-            <!-- THORACIC VERTEBRAE 14 (showing 8 with ribs) -->
-            <g fill="#132840" stroke="#6abccc" stroke-width="0.75" opacity="0.9">
-              <rect x="129" y="93" width="10" height="5.5" rx="1.2"/><rect x="129" y="99.5" width="10" height="5.5" rx="1.2"/>
-              <rect x="129" y="106" width="10" height="5.5" rx="1.2"/><rect x="129" y="112.5" width="10" height="5.5" rx="1.2"/>
-              <rect x="129" y="119" width="10" height="5.5" rx="1.2"/><rect x="129" y="125.5" width="10" height="5.5" rx="1.2"/>
-              <rect x="129" y="132" width="10" height="5.5" rx="1.2"/><rect x="129" y="138.5" width="10" height="5.5" rx="1.2"/>
-            </g>
-            <!-- RIBS LEFT (sea otters have very large lung capacity) -->
-            <g fill="none" stroke="#52aec8" stroke-width="0.95" opacity="0.78">
-              <path d="M129 95 Q112 94 103 101 Q99 108 106 113 Q117 116 129 113"/>
-              <path d="M129 102 Q110 101 100 109 Q96 117 103 122 Q116 126 129 122"/>
-              <path d="M129 108 Q108 107 99 116 Q95 125 103 130 Q116 134 129 130"/>
-              <path d="M129 115 Q108 114 100 124 Q97 133 105 137 Q117 140 129 137"/>
-              <path d="M129 121 Q110 120 102 129 Q99 137 108 141 Q119 144 129 141"/>
-              <path d="M129 128 Q113 127 107 135 Q105 142 113 145 Q122 147 129 145"/>
-              <path d="M129 134 Q117 133 113 140 Q111 145 118 147 Q124 149 129 148"/>
-              <path d="M129 140 Q120 139 117 145 Q116 149 122 150 Q126 151 129 151"/>
-            </g>
-            <!-- RIBS RIGHT -->
-            <g fill="none" stroke="#52aec8" stroke-width="0.95" opacity="0.78">
-              <path d="M139 95 Q156 94 165 101 Q169 108 162 113 Q151 116 139 113"/>
-              <path d="M139 102 Q158 101 168 109 Q172 117 165 122 Q152 126 139 122"/>
-              <path d="M139 108 Q160 107 169 116 Q173 125 165 130 Q152 134 139 130"/>
-              <path d="M139 115 Q160 114 168 124 Q171 133 163 137 Q151 140 139 137"/>
-              <path d="M139 121 Q158 120 166 129 Q169 137 160 141 Q149 144 139 141"/>
-              <path d="M139 128 Q155 127 161 135 Q163 142 155 145 Q146 147 139 145"/>
-              <path d="M139 134 Q151 133 155 140 Q157 145 150 147 Q144 149 139 148"/>
-              <path d="M139 140 Q148 139 151 145 Q152 149 146 150 Q142 151 139 151"/>
-            </g>
-            <!-- sternum -->
-            <rect x="132" y="93" width="4" height="60" rx="1.5" fill="#1a3d52" stroke="#4aa8c0" stroke-width="0.7" opacity="0.75"/>
-            <!-- HEART highlight -->
-            <ellipse cx="124" cy="116" rx="8" ry="9" fill="none" stroke="#00e676" stroke-width="1" stroke-dasharray="2,1.5" opacity="0.85"/>
-            <text x="116" y="110" fill="#00e676" font-size="5" font-family="monospace" opacity="0.8">♥ HEART</text>
-            <!-- LUMBAR SPINE 6 vertebrae -->
-            <g fill="#132840" stroke="#6abccc" stroke-width="0.75" opacity="0.9">
-              <rect x="129" y="154" width="10" height="5.5" rx="1.2"/><rect x="129" y="160.5" width="10" height="5.5" rx="1.2"/>
-              <rect x="129" y="167" width="10" height="5.5" rx="1.2"/><rect x="129" y="173.5" width="10" height="5.5" rx="1.2"/>
-              <rect x="129" y="180" width="10" height="5.5" rx="1.2"/><rect x="129" y="186.5" width="10" height="5.5" rx="1.2"/>
-            </g>
-            <!-- PELVIS -->
-            <ellipse cx="134" cy="197" rx="24" ry="7" fill="none" stroke="#5ab8d0" stroke-width="1.1" opacity="0.8"/>
-            <path d="M114 193 Q109 202 112 208" fill="none" stroke="#52aec8" stroke-width="0.9" opacity="0.75"/>
-            <path d="M154 193 Q159 202 156 208" fill="none" stroke="#52aec8" stroke-width="0.9" opacity="0.75"/>
-            <path d="M129 193 Q134 197 139 193 L139 203 Q134 207 129 203Z" fill="#132840" stroke="#5ab8d0" stroke-width="0.85" opacity="0.85"/>
-            <!-- LEFT FORELIMB (no clavicle — sea otter unique) -->
-            <!-- scapula L -->
-            <path d="M114 93 Q105 93 103 101 Q102 109 110 111 Q116 111 117 104Z" fill="#172f42" stroke="#5ab8d0" stroke-width="0.85" opacity="0.85"/>
-            <!-- humerus L -->
-            <line x1="108" y1="111" x2="93" y2="137" stroke="#80d0e8" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/>
-            <!-- radius + ulna L -->
-            <line x1="93" y1="137" x2="78" y2="157" stroke="#6abccc" stroke-width="1.7" stroke-linecap="round" opacity="0.85"/>
-            <line x1="94" y1="137" x2="81" y2="158" stroke="#5aaec0" stroke-width="1.1" stroke-linecap="round" opacity="0.65"/>
-            <!-- webbed paw L: 5 digits, last longest -->
-            <path d="M78 157 L71 166 M78 157 L75 168 M78 157 L78 169 M78 157 L82 168 M78 157 L85 167" stroke="#52a8c0" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/>
-            <!-- web membrane -->
-            <path d="M71 166 Q75 162 78 169 Q79 164 82 168 Q83 163 85 167" fill="rgba(80,180,210,0.15)" stroke="none"/>
-            <!-- BANDAGE marker on L flipper -->
-            <ellipse cx="78" cy="161" rx="10" ry="6" fill="none" stroke="#00e676" stroke-width="1" stroke-dasharray="2,1.5" opacity="0.7"/>
-            <text x="64" y="158" fill="#00e676" font-size="5" font-family="monospace" opacity="0.9">✓ BANDAGE</text>
-            <rect x="68" y="162" width="20" height="3" rx="1.5" fill="#00e676" opacity="0.45"/>
-            <!-- RIGHT FORELIMB -->
-            <path d="M154 93 Q163 93 165 101 Q166 109 158 111 Q152 111 151 104Z" fill="#172f42" stroke="#5ab8d0" stroke-width="0.85" opacity="0.85"/>
-            <line x1="160" y1="111" x2="175" y2="137" stroke="#80d0e8" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/>
-            <line x1="175" y1="137" x2="190" y2="157" stroke="#6abccc" stroke-width="1.7" stroke-linecap="round" opacity="0.85"/>
-            <line x1="174" y1="137" x2="187" y2="158" stroke="#5aaec0" stroke-width="1.1" stroke-linecap="round" opacity="0.65"/>
-            <path d="M190 157 L183 166 M190 157 L187 168 M190 157 L190 169 M190 157 L194 168 M190 157 L197 167" stroke="#52a8c0" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/>
-            <path d="M183 166 Q187 162 190 169 Q191 164 194 168 Q195 163 197 167" fill="rgba(80,180,210,0.15)" stroke="none"/>
-            <!-- TAIL: muscular flattened — sea otter characteristic -->
-            <path d="M134 205 Q128 213 118 218 M134 205 Q140 213 150 218" fill="none" stroke="#5ab0c8" stroke-width="2" stroke-linecap="round" opacity="0.75"/>
-            <!-- tail vertebrae suggestion -->
-            <g fill="#132840" stroke="#4a9ab0" stroke-width="0.5" opacity="0.6">
-              <circle cx="131" cy="207" r="1.5"/><circle cx="134" cy="210" r="1.5"/><circle cx="137" cy="207" r="1.5"/>
-              <circle cx="127" cy="212" r="1.2"/><circle cx="141" cy="212" r="1.2"/>
-            </g>
+          <svg id="xraySvg" viewBox="0 0 268 270" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:270px;display:block">
+            <!-- OTTER X-RAY (default) -->
+            <rect width="268" height="270" fill="#0a0f1a"/>
+            <g id="xray-content">
+            <!-- grid -->
+            <g stroke="#152535" stroke-width="0.4"><line x1="0" y1="54" x2="268" y2="54"/><line x1="0" y1="108" x2="268" y2="108"/><line x1="0" y1="162" x2="268" y2="162"/><line x1="0" y1="216" x2="268" y2="216"/><line x1="67" y1="0" x2="67" y2="270"/><line x1="134" y1="0" x2="134" y2="270"/><line x1="201" y1="0" x2="201" y2="270"/></g>
+            <!-- skull -->
+            <ellipse cx="134" cy="24" rx="23" ry="17" fill="#172f42" stroke="#80d0e8" stroke-width="1.1" opacity="0.95"/>
+            <ellipse cx="124" cy="23" rx="5.5" ry="4.5" fill="#0b1d2c" stroke="#5abcd4" stroke-width="0.9" opacity="0.95"/>
+            <ellipse cx="144" cy="23" rx="5.5" ry="4.5" fill="#0b1d2c" stroke="#5abcd4" stroke-width="0.9" opacity="0.95"/>
+            <path d="M128 30 Q134 34 140 30" fill="none" stroke="#7ecce0" stroke-width="0.9" opacity="0.85"/>
+            <line x1="134" y1="30" x2="134" y2="35" stroke="#6abccc" stroke-width="0.8" opacity="0.75"/>
+            <path d="M111 23 Q112 28 118 30" fill="none" stroke="#5ab0c8" stroke-width="0.9" opacity="0.75"/>
+            <path d="M157 23 Q156 28 150 30" fill="none" stroke="#5ab0c8" stroke-width="0.9" opacity="0.75"/>
+            <path d="M119 33 Q134 45 149 33 Q153 40 149 45 Q134 50 119 45 Q115 40 119 33Z" fill="#132840" stroke="#5ab8d0" stroke-width="0.9" opacity="0.9"/>
+            <rect x="124" y="43" width="4" height="4" rx="1" fill="#90dcea" opacity="0.8"/><rect x="129" y="43" width="4" height="4" rx="1" fill="#90dcea" opacity="0.8"/><rect x="134" y="43" width="4" height="4" rx="1" fill="#90dcea" opacity="0.8"/><rect x="139" y="43" width="4" height="4" rx="1" fill="#90dcea" opacity="0.8"/>
+            <!-- cervical 7 -->
+            <g fill="#132840" stroke="#6abccc" stroke-width="0.75" opacity="0.9"><rect x="130" y="49" width="8" height="5.5" rx="1.2"/><rect x="130" y="55.5" width="8" height="5.5" rx="1.2"/><rect x="130" y="62" width="8" height="5.5" rx="1.2"/><rect x="130" y="68.5" width="8" height="5.5" rx="1.2"/><rect x="130" y="75" width="8" height="5.5" rx="1.2"/><rect x="130" y="81.5" width="8" height="5.5" rx="1.2"/><rect x="130" y="88" width="8" height="5.5" rx="1.2"/></g>
+            <!-- thoracic + ribs -->
+            <g fill="#132840" stroke="#6abccc" stroke-width="0.75" opacity="0.9"><rect x="129" y="96" width="10" height="5.5" rx="1.2"/><rect x="129" y="102.5" width="10" height="5.5" rx="1.2"/><rect x="129" y="109" width="10" height="5.5" rx="1.2"/><rect x="129" y="115.5" width="10" height="5.5" rx="1.2"/><rect x="129" y="122" width="10" height="5.5" rx="1.2"/><rect x="129" y="128.5" width="10" height="5.5" rx="1.2"/><rect x="129" y="135" width="10" height="5.5" rx="1.2"/><rect x="129" y="141.5" width="10" height="5.5" rx="1.2"/></g>
+            <g fill="none" stroke="#52aec8" stroke-width="0.9" opacity="0.75"><path d="M129 98 Q111 97 102 104 Q98 111 105 116 Q117 119 129 116"/><path d="M129 105 Q109 104 99 112 Q95 120 102 125 Q115 128 129 125"/><path d="M129 111 Q108 110 98 119 Q94 128 102 133 Q115 136 129 133"/><path d="M129 118 Q108 117 99 127 Q96 136 104 140 Q117 143 129 140"/><path d="M129 124 Q110 123 102 132 Q99 140 107 144 Q119 147 129 144"/><path d="M129 131 Q113 130 107 138 Q104 145 112 148 Q122 150 129 148"/><path d="M129 137 Q117 136 113 143 Q110 148 117 150 Q124 152 129 151"/><path d="M129 143 Q120 142 117 148 Q115 152 122 153 Q126 154 129 154"/></g>
+            <g fill="none" stroke="#52aec8" stroke-width="0.9" opacity="0.75"><path d="M139 98 Q157 97 166 104 Q170 111 163 116 Q151 119 139 116"/><path d="M139 105 Q159 104 169 112 Q173 120 166 125 Q153 128 139 125"/><path d="M139 111 Q160 110 170 119 Q174 128 166 133 Q153 136 139 133"/><path d="M139 118 Q160 117 169 127 Q172 136 164 140 Q151 143 139 140"/><path d="M139 124 Q158 123 166 132 Q169 140 161 144 Q149 147 139 144"/><path d="M139 131 Q155 130 161 138 Q164 145 156 148 Q146 150 139 148"/><path d="M139 137 Q151 136 155 143 Q157 148 150 150 Q144 152 139 151"/><path d="M139 143 Q148 142 151 148 Q152 152 146 153 Q142 154 139 154"/></g>
+            <rect x="132" y="96" width="4" height="60" rx="1.5" fill="#1a3d52" stroke="#4aa8c0" stroke-width="0.7" opacity="0.72"/>
+            <ellipse cx="123" cy="118" rx="8" ry="9" fill="none" stroke="#00e676" stroke-width="1" stroke-dasharray="2,1.5" opacity="0.85"/>
+            <text x="115" y="112" fill="#00e676" font-size="5" font-family="monospace" opacity="0.8">♥ HEART</text>
+            <!-- lumbar 6 -->
+            <g fill="#132840" stroke="#6abccc" stroke-width="0.75" opacity="0.9"><rect x="129" y="158" width="10" height="5.5" rx="1.2"/><rect x="129" y="164.5" width="10" height="5.5" rx="1.2"/><rect x="129" y="171" width="10" height="5.5" rx="1.2"/><rect x="129" y="177.5" width="10" height="5.5" rx="1.2"/><rect x="129" y="184" width="10" height="5.5" rx="1.2"/><rect x="129" y="190.5" width="10" height="5.5" rx="1.2"/></g>
+            <!-- pelvis -->
+            <ellipse cx="134" cy="202" rx="24" ry="7" fill="none" stroke="#5ab8d0" stroke-width="1.1" opacity="0.8"/>
+            <path d="M113 198 Q108 207 111 213" fill="none" stroke="#52aec8" stroke-width="0.9" opacity="0.75"/>
+            <path d="M155 198 Q160 207 157 213" fill="none" stroke="#52aec8" stroke-width="0.9" opacity="0.75"/>
+            <path d="M129 198 Q134 202 139 198 L139 208 Q134 212 129 208Z" fill="#132840" stroke="#5ab8d0" stroke-width="0.85" opacity="0.85"/>
+            <!-- forelimbs -->
+            <path d="M114 95 Q105 95 103 103 Q102 111 110 113 Q116 113 117 106Z" fill="#172f42" stroke="#5ab8d0" stroke-width="0.85" opacity="0.85"/>
+            <line x1="108" y1="113" x2="92" y2="140" stroke="#80d0e8" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/>
+            <line x1="92" y1="140" x2="76" y2="161" stroke="#6abccc" stroke-width="1.7" stroke-linecap="round" opacity="0.85"/>
+            <line x1="93" y1="140" x2="79" y2="162" stroke="#5aaec0" stroke-width="1.1" stroke-linecap="round" opacity="0.62"/>
+            <path d="M76 161 L69 170 M76 161 L73 172 M76 161 L76 173 M76 161 L80 172 M76 161 L83 171" stroke="#52a8c0" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/>
+            <ellipse cx="76" cy="165" rx="10" ry="6" fill="none" stroke="#00e676" stroke-width="1" stroke-dasharray="2,1.5" opacity="0.7"/>
+            <text x="62" y="162" fill="#00e676" font-size="5" font-family="monospace" opacity="0.9">✓ BANDAGE</text>
+            <rect x="66" y="166" width="20" height="3" rx="1.5" fill="#00e676" opacity="0.42"/>
+            <path d="M154 95 Q163 95 165 103 Q166 111 158 113 Q152 113 151 106Z" fill="#172f42" stroke="#5ab8d0" stroke-width="0.85" opacity="0.85"/>
+            <line x1="160" y1="113" x2="176" y2="140" stroke="#80d0e8" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/>
+            <line x1="176" y1="140" x2="192" y2="161" stroke="#6abccc" stroke-width="1.7" stroke-linecap="round" opacity="0.85"/>
+            <line x1="175" y1="140" x2="189" y2="162" stroke="#5aaec0" stroke-width="1.1" stroke-linecap="round" opacity="0.62"/>
+            <path d="M192 161 L185 170 M192 161 L189 172 M192 161 L192 173 M192 161 L196 172 M192 161 L199 171" stroke="#52a8c0" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/>
+            <!-- tail -->
+            <path d="M134 210 Q128 220 117 228 M134 210 Q140 220 151 228" fill="none" stroke="#5ab0c8" stroke-width="2.1" stroke-linecap="round" opacity="0.72"/>
+            <g fill="#132840" stroke="#4a9ab0" stroke-width="0.5" opacity="0.6"><circle cx="131" cy="213" r="1.5"/><circle cx="134" cy="216" r="1.5"/><circle cx="137" cy="213" r="1.5"/><circle cx="127" cy="219" r="1.2"/><circle cx="141" cy="219" r="1.2"/></g>
+            <!-- tail fan -->
+            <path d="M117 228 Q112 236 110 244 M151 228 Q156 236 158 244" fill="none" stroke="#4a9ab0" stroke-width="1.4" stroke-linecap="round" opacity="0.55"/>
+            <path d="M110 244 Q108 252 109 258 M158 244 Q160 252 159 258" fill="none" stroke="#4a9ab0" stroke-width="1.1" stroke-linecap="round" opacity="0.4"/>
             <!-- watermark -->
-            <rect x="170" y="210" width="96" height="10" rx="2" fill="#0a1520" opacity="0.8"/>
-            <text x="174" y="218" fill="#00c9a7" font-size="7" font-family="monospace" opacity="0.9">MONTEREY RESCUE CTR</text>
+            <rect x="160" y="260" width="106" height="10" rx="2" fill="#0a1520" opacity="0.8"/>
+            <text x="164" y="268" fill="#00c9a7" font-size="7" font-family="monospace" opacity="0.9">MONTEREY RESCUE CTR</text>
+            </g>
           </svg>
         </div>
-        <div style="margin-top:6px;display:flex;gap:5px">
-          <button class="btn btn-ghost btn-sm" style="flex:1;font-size:11px" onclick="runXray()">🔬 Run X-Ray Scan</button>
+        <div style="margin-top:6px;display:flex;gap:4px">
+          <button class="btn btn-ghost btn-sm" style="flex:1;font-size:10px" onclick="runXray()">🔬 Run X-Ray Scan</button>
         </div>
       </div>
       <!-- CHECKLIST -->
@@ -536,55 +650,148 @@ canvas#heartCanvas{width:100%;height:66px;display:block}
         </div>
       </div>
     </div><!-- /right -->
-  </div><!-- /main-grid -->
+  </div>
 </div><!-- /dashboard -->
 
+<!-- VIDEO MODAL -->
+<div class="video-modal" id="videoModal">
+  <div class="video-modal-inner">
+    <div class="video-modal-title" id="vmTitle">Video</div>
+    <div class="video-modal-src" id="vmSrc">Source</div>
+    <div class="video-iframe-wrap"><iframe id="vmFrame" allowfullscreen allow="autoplay"></iframe></div>
+  </div>
+  <button class="video-modal-close" onclick="closeVideo()">✕ Close Video</button>
+</div>
+
+<!-- AI TEXT POP-UP -->
+<div class="ai-text-popup" id="aiTextPopup">
+  <span class="ai-text-popup-icon">📱</span>
+  <div class="ai-text-popup-from">📨 New Message from Dr. Marina AI</div>
+  <div class="ai-text-popup-msg" id="aiPopupMsg">...</div>
+  <button class="ai-text-popup-dismiss" onclick="dismissAiPopup()">Got it! ✓</button>
+</div>
+
 <div class="toast" id="toast"></div>
+
 <div class="modal" id="dischargeModal">
   <div class="modal-box">
-    <div style="font-size:42px;margin-bottom:6px">⭐</div>
+    <div style="font-size:38px;margin-bottom:5px">⭐</div>
     <h3>Sign the Chart!</h3>
-    <p>Onyx has been seen today. Ready to sign and save?</p>
-    <div style="background:#f0fdfa;border-radius:10px;padding:10px;margin-bottom:12px;text-align:left;font-size:12px;line-height:1.9;color:var(--text-mid)">
-      <strong style="color:var(--text-dark)">Patient:</strong> Onyx (Sea Otter)<br>
+    <p>Ready to sign and save today's visit record?</p>
+    <div style="background:#f0fdfa;border-radius:9px;padding:9px;margin-bottom:11px;text-align:left;font-size:11px;line-height:1.9;color:var(--text-mid)">
+      <strong style="color:var(--text-dark)">Patient:</strong> <span id="modalPatient">Onyx (Sea Otter)</span><br>
       <strong style="color:var(--text-dark)">Doctor:</strong> <span id="modalDr">Dr. Juliet D.</span><br>
       <strong style="color:var(--text-dark)">Date:</strong> <span id="modalDate"></span><br>
       <strong style="color:var(--text-dark)">Status:</strong> In Recovery ✓
     </div>
     <div class="modal-btns">
-      <button class="btn btn-ghost" onclick="document.getElementById('dischargeModal').classList.remove('open')">Cancel</button>
-      <button class="btn btn-teal" onclick="signChart()">✅ Sign &amp; Save!</button>
+      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('dischargeModal').classList.remove('open')">Cancel</button>
+      <button class="btn btn-teal btn-sm" onclick="signChart()">✅ Sign &amp; Save!</button>
     </div>
   </div>
 </div>
 
 <script>
-// STATE
+// ═══════ STATE ═══════
 let doctorName='Dr. Juliet D.', doctorTitle='Marine Biologist & Vet', doctorPhotoUrl=null;
+let currentPatient='onyx';
+let currentAiMsg='Hi Dr. Juliet! Press the button to get a task!';
+let aiTaskHistory=[];
 
-// BUBBLES
-function makeBubbles(id,n){
-  const c=document.getElementById(id); if(!c)return;
-  for(let i=0;i<n;i++){
-    const b=document.createElement('div'); b.className='bubble';
-    const s=16+Math.random()*70;
-    b.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;animation-duration:${7+Math.random()*10}s;animation-delay:${Math.random()*9}s`;
-    c.appendChild(b);
-  }
+const PATIENTS={
+  onyx:{name:'Onyx',emoji:'🦦',species:'Sea Otter',sex:'F',weight:'28',tag:'In Care ✦',tagClass:'incare',xName:'ONYX',xSpecies:'SEA OTTER (F)',color:'var(--teal)'},
+  pearl:{name:'Pearl',emoji:'🦭',species:'Harbor Seal',sex:'M',weight:'62',tag:'Monitoring',tagClass:'monitoring',xName:'PEARL',xSpecies:'HARBOR SEAL (M)',color:'var(--seal)'},
+  echo:{name:'Echo',emoji:'🐬',species:'Dolphin',sex:'F',weight:'285',tag:'Healthy ✓',tagClass:'healthy',xName:'ECHO',xSpecies:'BOTTLENOSE DOLPHIN (F)',color:'var(--dolphin)'}
+};
+
+// ═══════ AI DOCTOR PROMPTS ═══════
+const AI_PROMPTS_ONYX=[
+  "🦦 Onyx seems restless! Can you check her left flipper bandage and make sure it's not too tight? Log what you find.",
+  "🐟 Feeding time! Onyx needs 3 anchovies and her vitamin supplements. Don't forget to weigh her food first!",
+  "💉 Time to check Onyx's temperature. A healthy sea otter should be around 101°F. Record it in the vitals monitor!",
+  "🔬 Dr. Juliet, please run an X-Ray scan on Onyx's left flipper. We need to see if the bone is healing properly.",
+  "😴 Onyx has been very active today! Please give her some rest time and make sure her pool is nice and calm.",
+  "👀 Quick eye check needed! Onyx's eyes should be bright and clear. Check them and mark the box in today's checkup.",
+  "💊 It's medicine time! Give Onyx her pain relief medicine and log the time you gave it.",
+  "📡 Run a full body scan on Onyx! We want to make sure everything inside is healthy and working well.",
+  "🦷 Time for a dental check! Sea otters use their flat teeth to crush shellfish. Check Onyx's teeth and log the results.",
+  "🩺 Please do a complete checkup on Onyx today — check eyes, ears, nose, heart, and flippers. Check them all off!"
+];
+const AI_PROMPTS_PEARL=[
+  "🦭 Pearl is due for his daily flipper stretch exercise! Gently check both flippers and log their flexibility.",
+  "🐟 Pearl needs to eat! Harbor seals eat fish — give Pearl his meal and record how much he ate today.",
+  "💓 Time to listen to Pearl's heartbeat! Head to Vitals & Monitor and run the heart scanner for 20 seconds.",
+  "🔬 Pearl's ribs need checking on the X-Ray. Please run a scan and look for any signs of old injuries healing.",
+  "😴 Pearl needs his afternoon nap! Make sure his resting area is dry and comfortable. Log his rest time.",
+  "👃 Check Pearl's nose! A healthy seal should have moist nostrils. Write what you observe in the daily log.",
+  "📡 Run a full body scan on Pearl. We want to make sure his blubber layer is keeping him warm enough!",
+  "💊 Pearl's anti-inflammatory medicine is due! Give it to him gently and record the dosage in today's notes.",
+  "👀 Pearl's eyes need checking — seals have big eyes to see underwater. Make sure they're clear and healthy!",
+  "🩺 Full checkup time for Pearl! Check everything from head to tail and fill out the complete checkup list."
+];
+const AI_PROMPTS_ECHO=[
+  "🐬 Echo is ready for her swimming assessment! Check her dorsal fin and tail fluke for any cuts or abrasions.",
+  "🐟 Echo needs to eat! Dolphins eat about 15-30 lbs of fish per day. Give Echo her meal and log the amount.",
+  "📡 Run a full body scan on Echo — dolphins are very sensitive to sound so be extra gentle with the equipment!",
+  "💓 Echo's heart rate should be between 40-100 BPM. Start the heart monitor and check her vitals right away!",
+  "😴 Echo needs quiet time for rest. Make sure the environment is peaceful — dolphins are very smart and get stressed.",
+  "🔬 Run an X-Ray on Echo's jaw area. Dolphins have special teeth for catching fish — we want to make sure they're healthy!",
+  "👀 Check Echo's eyes and blowhole! A healthy dolphin has clear eyes and an open blowhole. Log everything you see.",
+  "💊 Echo's omega-3 supplements are due! These help keep her skin and fins healthy. Give them with her next meal.",
+  "🩺 Full wellness checkup for Echo today! She's been so playful — let's make sure she's 100% healthy.",
+  "📷 Take a photo of Echo for her patient file! We need an updated picture showing her dorsal fin markings."
+];
+
+function getAIPrompts(){
+  return currentPatient==='onyx'?AI_PROMPTS_ONYX:currentPatient==='pearl'?AI_PROMPTS_PEARL:AI_PROMPTS_ECHO;
 }
-makeBubbles('b1',16); makeBubbles('b2',16);
 
-// PHOTO UPLOAD for doctor
+function getAIPrompt(){
+  const typing=document.getElementById('aiTyping');
+  const textEl=document.getElementById('aiMessageText');
+  typing.classList.add('show');
+  textEl.style.opacity='0.3';
+  setTimeout(()=>{
+    const prompts=getAIPrompts();
+    const msg=prompts[Math.floor(Math.random()*prompts.length)];
+    currentAiMsg=msg;
+    textEl.textContent=msg;
+    textEl.style.opacity='1';
+    typing.classList.remove('show');
+    // add to task history
+    aiTaskHistory.unshift({msg,time:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})});
+    renderAiTasks();
+    sounds.success();
+    // auto show popup
+    setTimeout(()=>aiTextPopup(msg),300);
+  },1800);
+}
+
+function renderAiTasks(){
+  const el=document.getElementById('aiTaskList');
+  if(!aiTaskHistory.length){el.innerHTML='<div style="font-size:12px;color:var(--text-light);padding:10px;text-align:center">No tasks yet! 🤖</div>';return;}
+  el.innerHTML=aiTaskHistory.map(t=>`<div style="background:#f0fdfa;border-radius:8px;padding:7px 9px;display:flex;gap:7px;align-items:flex-start;border:1px solid #d0eaf5"><div style="font-size:12px;color:var(--text-dark);font-weight:600;flex:1">${t.msg}</div><div style="font-size:9px;color:var(--text-light);font-family:'Space Mono',monospace;white-space:nowrap;margin-top:2px">${t.time}</div></div>`).join('');
+}
+
+function aiTextPopup(msg){
+  document.getElementById('aiPopupMsg').textContent=msg;
+  const p=document.getElementById('aiTextPopup');
+  p.classList.add('show');
+  setTimeout(()=>{ if(p.classList.contains('show'))p.classList.remove('show'); },7000);
+}
+function dismissAiPopup(){document.getElementById('aiTextPopup').classList.remove('show');}
+
+// ═══════ BUBBLES ═══════
+function makeBubbles(id,n){
+  const c=document.getElementById(id);if(!c)return;
+  for(let i=0;i<n;i++){const b=document.createElement('div');b.className='bubble';const s=14+Math.random()*65;b.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;animation-duration:${7+Math.random()*11}s;animation-delay:${Math.random()*10}s`;c.appendChild(b);}
+}
+makeBubbles('b1',15);makeBubbles('b2',15);
+
+// ═══════ DOCTOR PHOTO ═══════
 document.getElementById('docPhotoFile').addEventListener('change',function(e){
-  const f=e.target.files[0]; if(!f)return;
-  const r=new FileReader();
-  r.onload=ev=>{
-    doctorPhotoUrl=ev.target.result;
-    const prev=document.getElementById('docPhotoPreview');
-    prev.src=doctorPhotoUrl; prev.style.display='block';
-    document.getElementById('docPhotoIcon').style.display='none';
-  };
-  r.readAsDataURL(f);
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();r.onload=ev=>{doctorPhotoUrl=ev.target.result;const prev=document.getElementById('docPhotoPreview');prev.src=doctorPhotoUrl;prev.style.display='block';document.getElementById('docPhotoIcon').style.display='none';};r.readAsDataURL(f);
 });
 
 function doSignIn(){
@@ -594,17 +801,12 @@ function doSignIn(){
   const raw=n.replace(/^dr\.?\s*/i,'');
   doctorName='Dr. '+raw;
   doctorTitle=t||'Marine Biologist & Vet';
-  applyDoctor();
-  showScreen('home');
-  sounds.success();
+  applyDoctor();showScreen('home');sounds.success();
 }
 
 function applyDoctor(){
-  const initials=doctorName.replace(/^Dr\.?\s*/i,'').split(' ').map(w=>w[0]||'').join('').toUpperCase().slice(0,2)||'JD';
-  const makeAv=(el)=>{
-    if(doctorPhotoUrl){el.innerHTML=`<img src="${doctorPhotoUrl}" alt="" style="width:100%;height:100%;object-fit:cover">`;}
-    else{el.textContent=initials;}
-  };
+  const ini=doctorName.replace(/^Dr\.?\s*/i,'').split(' ').map(w=>w[0]||'').join('').toUpperCase().slice(0,2)||'JD';
+  const mkAv=el=>{if(doctorPhotoUrl){el.innerHTML=`<img src="${doctorPhotoUrl}" alt="" style="width:100%;height:100%;object-fit:cover">`;}else{el.textContent=ini;}};
   document.getElementById('hTitle').textContent=doctorName;
   document.getElementById('hName').textContent=doctorName;
   document.getElementById('hDocTitle').textContent=doctorTitle;
@@ -612,17 +814,194 @@ function applyDoctor(){
   document.getElementById('dTitle').textContent=doctorTitle;
   document.getElementById('modalDr').textContent=doctorName;
   document.getElementById('xDr').textContent=doctorName.replace(/^Dr\.?\s*/i,'').toUpperCase();
-  makeAv(document.getElementById('hAv'));
-  makeAv(document.getElementById('dAv'));
+  mkAv(document.getElementById('hAv'));
+  mkAv(document.getElementById('dAv'));
 }
 
-function showScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('screen-'+id).classList.add('active');
+// ═══════ PATIENT SELECT ═══════
+function selectPatient(id){
+  currentPatient=id;
+  const p=PATIENTS[id];
+  // home cards highlight
+  document.querySelectorAll('.patient-select-card').forEach((c,i)=>{c.classList.remove('active-patient');if(['onyx','pearl','echo'][i]===id)c.classList.add('active-patient');});
+  // update dashboard
+  document.getElementById('sideEmoji').textContent=p.emoji;
+  document.getElementById('sideName').textContent=p.name;
+  document.getElementById('sideSpecies').textContent=p.species+' · '+(p.sex==='F'?'Female':'Male');
+  document.getElementById('sideTag').textContent=p.tag;
+  document.getElementById('patientIndicator').textContent=p.emoji+' '+p.name;
+  document.getElementById('petName').value=p.name;
+  document.getElementById('animalType').value=p.species;
+  document.getElementById('weight').value=p.weight;
+  document.getElementById('vWeight').textContent=p.weight;
+  document.getElementById('hmonName').textContent=p.name.toUpperCase();
+  document.getElementById('xrayPatientName').textContent=p.name;
+  document.getElementById('xName').textContent=p.xName;
+  document.getElementById('xSpecies').textContent=p.xSpecies;
+  document.getElementById('xWt').textContent=p.weight;
+  document.getElementById('modalPatient').textContent=p.name+' ('+p.species+')';
+  // update gallery placeholders
+  document.getElementById('mainPhotoGrid').innerHTML=`<div class="photo-thumb">${p.emoji}</div><div class="photo-thumb">🌊</div><div class="photo-thumb">⭐</div>`;
+  document.getElementById('photoGrid').innerHTML=`<div class="photo-thumb">${p.emoji}</div><div class="photo-thumb">🌊</div><div class="photo-thumb">➕</div>`;
+  // swap xray
+  loadXray(id);
+  addLog('📋',`Switched to patient: ${p.emoji} ${p.name} (${p.species})`,true);
+  showScreen('dashboard');sounds.click();
 }
-function goDash(){sounds.success();showScreen('dashboard');addLog('📋',"Opened Onyx's chart — Let's check her out! 🦦",true);}
 
-// AUDIO
+function loadXray(id){
+  const svg=document.getElementById('xray-content');
+  if(id==='onyx'){/* already otter — keep as is, just refresh */return;}
+  if(id==='pearl'){
+    // HARBOR SEAL X-RAY
+    svg.innerHTML=`
+    <g stroke="#152535" stroke-width="0.4"><line x1="0" y1="54" x2="268" y2="54"/><line x1="0" y1="108" x2="268" y2="108"/><line x1="0" y1="162" x2="268" y2="162"/><line x1="0" y1="216" x2="268" y2="216"/><line x1="67" y1="0" x2="67" y2="270"/><line x1="134" y1="0" x2="134" y2="270"/><line x1="201" y1="0" x2="201" y2="270"/></g>
+    <!-- seal skull: rounder, bigger -->
+    <ellipse cx="134" cy="26" rx="28" ry="20" fill="#172f42" stroke="#80d0e8" stroke-width="1.2" opacity="0.95"/>
+    <ellipse cx="120" cy="24" rx="7" ry="5.5" fill="#0b1d2c" stroke="#5abcd4" stroke-width="0.9" opacity="0.95"/>
+    <ellipse cx="148" cy="24" rx="7" ry="5.5" fill="#0b1d2c" stroke="#5abcd4" stroke-width="0.9" opacity="0.95"/>
+    <path d="M122 34 Q134 40 146 34 Q150 42 146 48 Q134 52 122 48 Q118 42 122 34Z" fill="#132840" stroke="#5ab8d0" stroke-width="0.9" opacity="0.9"/>
+    <!-- whiskers suggestion -->
+    <g stroke="#4a9ab0" stroke-width="0.7" opacity="0.5"><line x1="110" y1="38" x2="95" y2="35"/><line x1="110" y1="40" x2="94" y2="40"/><line x1="158" y1="38" x2="173" y2="35"/><line x1="158" y1="40" x2="174" y2="40"/></g>
+    <!-- cervical -->
+    <g fill="#132840" stroke="#6abccc" stroke-width="0.75" opacity="0.9"><rect x="128" y="54" width="12" height="6" rx="1.2"/><rect x="128" y="61" width="12" height="6" rx="1.2"/><rect x="128" y="68" width="12" height="6" rx="1.2"/><rect x="128" y="75" width="12" height="6" rx="1.2"/><rect x="128" y="82" width="12" height="6" rx="1.2"/><rect x="128" y="89" width="12" height="6" rx="1.2"/><rect x="128" y="96" width="12" height="6" rx="1.2"/></g>
+    <!-- seal thoracic + wide rib cage (seals have very wide ribcage) -->
+    <g fill="#132840" stroke="#6abccc" stroke-width="0.75" opacity="0.9"><rect x="127" y="104" width="14" height="6" rx="1.2"/><rect x="127" y="111" width="14" height="6" rx="1.2"/><rect x="127" y="118" width="14" height="6" rx="1.2"/><rect x="127" y="125" width="14" height="6" rx="1.2"/><rect x="127" y="132" width="14" height="6" rx="1.2"/><rect x="127" y="139" width="14" height="6" rx="1.2"/><rect x="127" y="146" width="14" height="6" rx="1.2"/></g>
+    <g fill="none" stroke="#52aec8" stroke-width="1.1" opacity="0.78"><path d="M127 106 Q104 105 93 114 Q88 123 97 129 Q111 133 127 129"/><path d="M127 113 Q102 112 90 122 Q85 132 94 138 Q110 142 127 138"/><path d="M127 120 Q101 119 89 130 Q83 141 93 147 Q110 151 127 147"/><path d="M127 127 Q103 126 91 137 Q86 148 96 153 Q112 157 127 153"/><path d="M127 133 Q105 132 95 142 Q91 151 100 156 Q115 159 127 156"/><path d="M127 140 Q108 139 100 148 Q97 155 106 159 Q118 162 127 159"/><path d="M127 146 Q112 145 106 153 Q104 158 113 161 Q121 163 127 162"/></g>
+    <g fill="none" stroke="#52aec8" stroke-width="1.1" opacity="0.78"><path d="M141 106 Q164 105 175 114 Q180 123 171 129 Q157 133 141 129"/><path d="M141 113 Q166 112 178 122 Q183 132 174 138 Q158 142 141 138"/><path d="M141 120 Q167 119 179 130 Q185 141 175 147 Q158 151 141 147"/><path d="M141 127 Q165 126 177 137 Q182 148 172 153 Q156 157 141 153"/><path d="M141 133 Q163 132 173 142 Q177 151 168 156 Q153 159 141 156"/><path d="M141 140 Q160 139 168 148 Q171 155 162 159 Q150 162 141 159"/><path d="M141 146 Q156 145 162 153 Q164 158 155 161 Q147 163 141 162"/></g>
+    <rect x="131" y="104" width="6" height="60" rx="2" fill="#1a3d52" stroke="#4aa8c0" stroke-width="0.7" opacity="0.7"/>
+    <ellipse cx="120" cy="128" rx="9" ry="10" fill="none" stroke="#00e676" stroke-width="1" stroke-dasharray="2,1.5" opacity="0.85"/>
+    <text x="111" y="121" fill="#00e676" font-size="5" font-family="monospace" opacity="0.8">♥ HEART</text>
+    <!-- lumbar -->
+    <g fill="#132840" stroke="#6abccc" stroke-width="0.75" opacity="0.9"><rect x="128" y="166" width="12" height="6" rx="1.2"/><rect x="128" y="173" width="12" height="6" rx="1.2"/><rect x="128" y="180" width="12" height="6" rx="1.2"/><rect x="128" y="187" width="12" height="6" rx="1.2"/><rect x="128" y="194" width="12" height="6" rx="1.2"/><rect x="128" y="201" width="12" height="6" rx="1.2"/></g>
+    <!-- pelvis -->
+    <ellipse cx="134" cy="213" rx="26" ry="8" fill="none" stroke="#5ab8d0" stroke-width="1.1" opacity="0.8"/>
+    <!-- seal rear flippers (hind limbs, different from otter) -->
+    <path d="M108 210 Q96 220 88 230 Q82 238 84 244" fill="none" stroke="#6abccc" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
+    <path d="M84 244 L76 252 M84 244 L82 254 M84 244 L86 254 M84 244 L90 253 M84 244 L93 251" stroke="#52a8c0" stroke-width="1.2" stroke-linecap="round" opacity="0.8"/>
+    <path d="M160 210 Q172 220 180 230 Q186 238 184 244" fill="none" stroke="#6abccc" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
+    <path d="M184 244 L176 252 M184 244 L182 254 M184 244 L186 254 M184 244 L190 253 M184 244 L193 251" stroke="#52a8c0" stroke-width="1.2" stroke-linecap="round" opacity="0.8"/>
+    <!-- fore flippers (seals have front flippers) -->
+    <path d="M112 104 Q101 104 99 113 Q98 122 108 124 Q115 124 116 116Z" fill="#172f42" stroke="#5ab8d0" stroke-width="0.85" opacity="0.85"/>
+    <line x1="106" y1="124" x2="88" y2="148" stroke="#80d0e8" stroke-width="2.6" stroke-linecap="round" opacity="0.9"/>
+    <path d="M88 148 L80 156 M88 148 L84 160 M88 148 L88 161 M88 148 L93 160 M88 148 L97 158" stroke="#52a8c0" stroke-width="1.4" stroke-linecap="round" opacity="0.85"/>
+    <path d="M156 104 Q167 104 169 113 Q170 122 160 124 Q153 124 152 116Z" fill="#172f42" stroke="#5ab8d0" stroke-width="0.85" opacity="0.85"/>
+    <line x1="162" y1="124" x2="180" y2="148" stroke="#80d0e8" stroke-width="2.6" stroke-linecap="round" opacity="0.9"/>
+    <path d="M180 148 L172 156 M180 148 L176 160 M180 148 L180 161 M180 148 L185 160 M180 148 L189 158" stroke="#52a8c0" stroke-width="1.4" stroke-linecap="round" opacity="0.85"/>
+    <rect x="160" y="260" width="106" height="10" rx="2" fill="#0a1520" opacity="0.8"/>
+    <text x="164" y="268" fill="#00c9a7" font-size="7" font-family="monospace" opacity="0.9">MONTEREY RESCUE CTR</text>`;
+  }
+  if(id==='echo'){
+    // DOLPHIN X-RAY (long streamlined body)
+    svg.innerHTML=`
+    <g stroke="#152535" stroke-width="0.4"><line x1="0" y1="54" x2="268" y2="54"/><line x1="0" y1="108" x2="268" y2="108"/><line x1="0" y1="162" x2="268" y2="162"/><line x1="0" y1="216" x2="268" y2="216"/><line x1="67" y1="0" x2="67" y2="270"/><line x1="134" y1="0" x2="134" y2="270"/><line x1="201" y1="0" x2="201" y2="270"/></g>
+    <!-- dolphin: very streamlined, pointed snout (rostrum), no hind limbs -->
+    <!-- skull + rostrum -->
+    <ellipse cx="134" cy="18" rx="20" ry="14" fill="#172f42" stroke="#80d0e8" stroke-width="1.1" opacity="0.95"/>
+    <path d="M114 18 Q104 18 92 20 Q84 22 82 26 Q84 29 92 30 Q104 30 114 28Z" fill="#172f42" stroke="#7ecce0" stroke-width="1" opacity="0.9"/>
+    <!-- melon (dolphin's forehead) -->
+    <ellipse cx="150" cy="14" rx="12" ry="8" fill="#1a3d52" stroke="#6abccc" stroke-width="0.8" opacity="0.75"/>
+    <!-- eye sockets -->
+    <ellipse cx="125" cy="18" rx="5" ry="4" fill="#0b1d2c" stroke="#5abcd4" stroke-width="0.9" opacity="0.95"/>
+    <!-- teeth in rostrum (dolphins have many small conical teeth) -->
+    <g fill="#90dcea" opacity="0.75"><rect x="84" y="22" width="2" height="4" rx="0.5"/><rect x="87" y="22" width="2" height="4" rx="0.5"/><rect x="90" y="22" width="2" height="4" rx="0.5"/><rect x="93" y="22" width="2" height="4" rx="0.5"/><rect x="96" y="22" width="2" height="4" rx="0.5"/><rect x="99" y="22" width="2" height="4" rx="0.5"/><rect x="102" y="22" width="2" height="4" rx="0.5"/><rect x="105" y="22" width="2" height="4" rx="0.5"/><rect x="108" y="22" width="2" height="4" rx="0.5"/></g>
+    <!-- cervical (dolphins have fused cervical vertebrae — looks compressed) -->
+    <g fill="#1a3060" stroke="#6abccc" stroke-width="0.7" opacity="0.85"><rect x="130" y="33" width="12" height="4" rx="1"/><rect x="130" y="38" width="12" height="4" rx="1"/><rect x="130" y="43" width="12" height="4" rx="1"/></g>
+    <!-- thoracic (dolphins have ~13 thoracic) -->
+    <g fill="#132840" stroke="#6abccc" stroke-width="0.75" opacity="0.9"><rect x="129" y="50" width="10" height="6" rx="1.2"/><rect x="129" y="57" width="10" height="6" rx="1.2"/><rect x="129" y="64" width="10" height="6" rx="1.2"/><rect x="129" y="71" width="10" height="6" rx="1.2"/><rect x="129" y="78" width="10" height="6" rx="1.2"/><rect x="129" y="85" width="10" height="6" rx="1.2"/><rect x="129" y="92" width="10" height="6" rx="1.2"/><rect x="129" y="99" width="10" height="6" rx="1.2"/><rect x="129" y="106" width="10" height="6" rx="1.2"/><rect x="129" y="113" width="10" height="6" rx="1.2"/><rect x="129" y="120" width="10" height="6" rx="1.2"/><rect x="129" y="127" width="10" height="6" rx="1.2"/><rect x="129" y="134" width="10" height="6" rx="1.2"/></g>
+    <!-- ribs (dolphins have more cylindrical rib cage) -->
+    <g fill="none" stroke="#52aec8" stroke-width="0.9" opacity="0.75">
+      <path d="M129 52 Q113 51 106 58 Q103 65 108 69 Q117 72 129 69"/><path d="M129 59 Q112 58 104 66 Q101 74 107 78 Q117 81 129 78"/>
+      <path d="M129 66 Q112 65 103 73 Q100 82 107 86 Q118 89 129 86"/><path d="M129 73 Q112 72 103 81 Q100 90 108 94 Q119 97 129 94"/>
+      <path d="M129 80 Q113 79 104 88 Q102 97 110 101 Q120 104 129 101"/><path d="M129 87 Q114 86 107 94 Q105 102 113 106 Q121 108 129 106"/>
+      <path d="M129 93 Q116 92 110 100 Q108 107 115 110 Q122 112 129 110"/><path d="M129 100 Q118 99 113 106 Q112 112 118 114 Q124 116 129 115"/>
+      <path d="M129 106 Q120 105 116 111 Q115 116 120 118 Q125 119 129 119"/></g>
+    <g fill="none" stroke="#52aec8" stroke-width="0.9" opacity="0.75">
+      <path d="M139 52 Q155 51 162 58 Q165 65 160 69 Q151 72 139 69"/><path d="M139 59 Q156 58 164 66 Q167 74 161 78 Q151 81 139 78"/>
+      <path d="M139 66 Q156 65 165 73 Q168 82 161 86 Q150 89 139 86"/><path d="M139 73 Q156 72 165 81 Q168 90 160 94 Q149 97 139 94"/>
+      <path d="M139 80 Q155 79 164 88 Q166 97 158 101 Q148 104 139 101"/><path d="M139 87 Q154 86 161 94 Q163 102 155 106 Q147 108 139 106"/>
+      <path d="M139 93 Q152 92 158 100 Q160 107 153 110 Q146 112 139 110"/><path d="M139 100 Q150 99 155 106 Q156 112 150 114 Q144 116 139 115"/>
+      <path d="M139 106 Q148 105 152 111 Q153 116 148 118 Q143 119 139 119"/></g>
+    <rect x="132" y="50" width="4" height="72" rx="1.5" fill="#1a3d52" stroke="#4aa8c0" stroke-width="0.7" opacity="0.7"/>
+    <!-- HEART -->
+    <ellipse cx="120" cy="80" rx="9" ry="10" fill="none" stroke="#00e676" stroke-width="1" stroke-dasharray="2,1.5" opacity="0.85"/>
+    <text x="112" y="73" fill="#00e676" font-size="5" font-family="monospace" opacity="0.8">♥ HEART</text>
+    <!-- lumbar (fewer than land mammals) -->
+    <g fill="#132840" stroke="#6abccc" stroke-width="0.75" opacity="0.9"><rect x="129" y="142" width="10" height="6" rx="1.2"/><rect x="129" y="149" width="10" height="6" rx="1.2"/><rect x="129" y="156" width="10" height="6" rx="1.2"/><rect x="129" y="163" width="10" height="6" rx="1.2"/><rect x="129" y="170" width="10" height="6" rx="1.2"/></g>
+    <!-- pelvis remnant (dolphins have vestigial pelvic bones — very small, evolutionary remnant) -->
+    <ellipse cx="134" cy="182" rx="8" ry="3" fill="none" stroke="#4a8ab0" stroke-width="0.8" opacity="0.5" stroke-dasharray="2,2"/>
+    <text x="143" y="183" fill="#4a9ab0" font-size="5" font-family="monospace" opacity="0.6">vestigial</text>
+    <!-- PECTORAL FINS (forelimbs) — dolphins have finger bones inside! -->
+    <path d="M114 54 Q103 54 100 60 Q98 68 106 70 Q112 70 114 63Z" fill="#172f42" stroke="#5ab8d0" stroke-width="0.85" opacity="0.85"/>
+    <line x1="103" y1="70" x2="82" y2="92" stroke="#80d0e8" stroke-width="2.6" stroke-linecap="round" opacity="0.9"/>
+    <!-- finger bones inside flipper -->
+    <path d="M82 92 L70 108 M82 92 L74 110 M82 92 L78 112 M82 92 L84 112 M82 92 L88 110" stroke="#52a8c0" stroke-width="1.3" stroke-linecap="round" opacity="0.8"/>
+    <path d="M154 54 Q165 54 168 60 Q170 68 162 70 Q156 70 154 63Z" fill="#172f42" stroke="#5ab8d0" stroke-width="0.85" opacity="0.85"/>
+    <line x1="165" y1="70" x2="186" y2="92" stroke="#80d0e8" stroke-width="2.6" stroke-linecap="round" opacity="0.9"/>
+    <path d="M186 92 L174 108 M186 92 L178 110 M186 92 L182 112 M186 92 L188 112 M186 92 L194 110" stroke="#52a8c0" stroke-width="1.3" stroke-linecap="round" opacity="0.8"/>
+    <!-- DORSAL FIN (cartilage, no bone) -->
+    <path d="M134 50 Q150 30 156 18 Q152 22 148 32 Q145 40 139 50" fill="#1a3d52" stroke="#5ab8d0" stroke-width="0.8" opacity="0.65" stroke-dasharray="3,2"/>
+    <text x="152" y="28" fill="#4a9ab0" font-size="5" font-family="monospace" opacity="0.7">dorsal fin</text>
+    <!-- TAIL FLUKES (horizontal, unlike fish) — caudal vertebrae spread out -->
+    <g fill="#132840" stroke="#6abccc" stroke-width="0.7" opacity="0.85"><rect x="130" y="176" width="8" height="5" rx="1"/><rect x="130" y="182" width="8" height="5" rx="1"/><rect x="130" y="188" width="8" height="5" rx="1"/><rect x="130" y="194" width="8" height="5" rx="1"/><rect x="130" y="200" width="8" height="5" rx="1"/><rect x="130" y="206" width="8" height="5" rx="1"/><rect x="130" y="212" width="8" height="5" rx="1"/><rect x="130" y="218" width="8" height="5" rx="1"/></g>
+    <!-- flukes horizontal -->
+    <path d="M134 225 Q108 232 92 242 Q82 248 80 256 Q84 262 94 258 Q110 250 134 244" fill="#172f42" stroke="#5ab8d0" stroke-width="1.1" opacity="0.8"/>
+    <path d="M134 225 Q160 232 176 242 Q186 248 188 256 Q184 262 174 258 Q158 250 134 244" fill="#172f42" stroke="#5ab8d0" stroke-width="1.1" opacity="0.8"/>
+    <text x="88" y="260" fill="#4a9ab0" font-size="5" font-family="monospace" opacity="0.7">← tail flukes (horizontal) →</text>
+    <rect x="160" y="262" width="106" height="10" rx="2" fill="#0a1520" opacity="0.8"/>
+    <text x="164" y="270" fill="#00c9a7" font-size="7" font-family="monospace" opacity="0.9">MONTEREY RESCUE CTR</text>`;
+  }
+  if(id==='onyx'){
+    // restore otter
+    svg.innerHTML=`
+    <g stroke="#152535" stroke-width="0.4"><line x1="0" y1="54" x2="268" y2="54"/><line x1="0" y1="108" x2="268" y2="108"/><line x1="0" y1="162" x2="268" y2="162"/><line x1="0" y1="216" x2="268" y2="216"/><line x1="67" y1="0" x2="67" y2="270"/><line x1="134" y1="0" x2="134" y2="270"/><line x1="201" y1="0" x2="201" y2="270"/></g>
+    <ellipse cx="134" cy="24" rx="23" ry="17" fill="#172f42" stroke="#80d0e8" stroke-width="1.1" opacity="0.95"/>
+    <ellipse cx="124" cy="23" rx="5.5" ry="4.5" fill="#0b1d2c" stroke="#5abcd4" stroke-width="0.9" opacity="0.95"/>
+    <ellipse cx="144" cy="23" rx="5.5" ry="4.5" fill="#0b1d2c" stroke="#5abcd4" stroke-width="0.9" opacity="0.95"/>
+    <path d="M128 30 Q134 34 140 30" fill="none" stroke="#7ecce0" stroke-width="0.9" opacity="0.85"/>
+    <line x1="134" y1="30" x2="134" y2="35" stroke="#6abccc" stroke-width="0.8" opacity="0.75"/>
+    <path d="M111 23 Q112 28 118 30" fill="none" stroke="#5ab0c8" stroke-width="0.9" opacity="0.75"/>
+    <path d="M157 23 Q156 28 150 30" fill="none" stroke="#5ab0c8" stroke-width="0.9" opacity="0.75"/>
+    <path d="M119 33 Q134 45 149 33 Q153 40 149 45 Q134 50 119 45 Q115 40 119 33Z" fill="#132840" stroke="#5ab8d0" stroke-width="0.9" opacity="0.9"/>
+    <rect x="124" y="43" width="4" height="4" rx="1" fill="#90dcea" opacity="0.8"/><rect x="129" y="43" width="4" height="4" rx="1" fill="#90dcea" opacity="0.8"/><rect x="134" y="43" width="4" height="4" rx="1" fill="#90dcea" opacity="0.8"/><rect x="139" y="43" width="4" height="4" rx="1" fill="#90dcea" opacity="0.8"/>
+    <g fill="#132840" stroke="#6abccc" stroke-width="0.75" opacity="0.9"><rect x="130" y="49" width="8" height="5.5" rx="1.2"/><rect x="130" y="55.5" width="8" height="5.5" rx="1.2"/><rect x="130" y="62" width="8" height="5.5" rx="1.2"/><rect x="130" y="68.5" width="8" height="5.5" rx="1.2"/><rect x="130" y="75" width="8" height="5.5" rx="1.2"/><rect x="130" y="81.5" width="8" height="5.5" rx="1.2"/><rect x="130" y="88" width="8" height="5.5" rx="1.2"/></g>
+    <g fill="#132840" stroke="#6abccc" stroke-width="0.75" opacity="0.9"><rect x="129" y="96" width="10" height="5.5" rx="1.2"/><rect x="129" y="102.5" width="10" height="5.5" rx="1.2"/><rect x="129" y="109" width="10" height="5.5" rx="1.2"/><rect x="129" y="115.5" width="10" height="5.5" rx="1.2"/><rect x="129" y="122" width="10" height="5.5" rx="1.2"/><rect x="129" y="128.5" width="10" height="5.5" rx="1.2"/><rect x="129" y="135" width="10" height="5.5" rx="1.2"/><rect x="129" y="141.5" width="10" height="5.5" rx="1.2"/></g>
+    <g fill="none" stroke="#52aec8" stroke-width="0.9" opacity="0.75"><path d="M129 98 Q111 97 102 104 Q98 111 105 116 Q117 119 129 116"/><path d="M129 105 Q109 104 99 112 Q95 120 102 125 Q115 128 129 125"/><path d="M129 111 Q108 110 98 119 Q94 128 102 133 Q115 136 129 133"/><path d="M129 118 Q108 117 99 127 Q96 136 104 140 Q117 143 129 140"/><path d="M129 124 Q110 123 102 132 Q99 140 107 144 Q119 147 129 144"/><path d="M129 131 Q113 130 107 138 Q104 145 112 148 Q122 150 129 148"/><path d="M129 137 Q117 136 113 143 Q110 148 117 150 Q124 152 129 151"/><path d="M129 143 Q120 142 117 148 Q115 152 122 153 Q126 154 129 154"/></g>
+    <g fill="none" stroke="#52aec8" stroke-width="0.9" opacity="0.75"><path d="M139 98 Q157 97 166 104 Q170 111 163 116 Q151 119 139 116"/><path d="M139 105 Q159 104 169 112 Q173 120 166 125 Q153 128 139 125"/><path d="M139 111 Q160 110 170 119 Q174 128 166 133 Q153 136 139 133"/><path d="M139 118 Q160 117 169 127 Q172 136 164 140 Q151 143 139 140"/><path d="M139 124 Q158 123 166 132 Q169 140 161 144 Q149 147 139 144"/><path d="M139 131 Q155 130 161 138 Q164 145 156 148 Q146 150 139 148"/><path d="M139 137 Q151 136 155 143 Q157 148 150 150 Q144 152 139 151"/><path d="M139 143 Q148 142 151 148 Q152 152 146 153 Q142 154 139 154"/></g>
+    <rect x="132" y="96" width="4" height="60" rx="1.5" fill="#1a3d52" stroke="#4aa8c0" stroke-width="0.7" opacity="0.72"/>
+    <ellipse cx="123" cy="118" rx="8" ry="9" fill="none" stroke="#00e676" stroke-width="1" stroke-dasharray="2,1.5" opacity="0.85"/>
+    <text x="115" y="112" fill="#00e676" font-size="5" font-family="monospace" opacity="0.8">♥ HEART</text>
+    <g fill="#132840" stroke="#6abccc" stroke-width="0.75" opacity="0.9"><rect x="129" y="158" width="10" height="5.5" rx="1.2"/><rect x="129" y="164.5" width="10" height="5.5" rx="1.2"/><rect x="129" y="171" width="10" height="5.5" rx="1.2"/><rect x="129" y="177.5" width="10" height="5.5" rx="1.2"/><rect x="129" y="184" width="10" height="5.5" rx="1.2"/><rect x="129" y="190.5" width="10" height="5.5" rx="1.2"/></g>
+    <ellipse cx="134" cy="202" rx="24" ry="7" fill="none" stroke="#5ab8d0" stroke-width="1.1" opacity="0.8"/>
+    <path d="M113 198 Q108 207 111 213" fill="none" stroke="#52aec8" stroke-width="0.9" opacity="0.75"/>
+    <path d="M155 198 Q160 207 157 213" fill="none" stroke="#52aec8" stroke-width="0.9" opacity="0.75"/>
+    <path d="M129 198 Q134 202 139 198 L139 208 Q134 212 129 208Z" fill="#132840" stroke="#5ab8d0" stroke-width="0.85" opacity="0.85"/>
+    <path d="M114 95 Q105 95 103 103 Q102 111 110 113 Q116 113 117 106Z" fill="#172f42" stroke="#5ab8d0" stroke-width="0.85" opacity="0.85"/>
+    <line x1="108" y1="113" x2="92" y2="140" stroke="#80d0e8" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/>
+    <line x1="92" y1="140" x2="76" y2="161" stroke="#6abccc" stroke-width="1.7" stroke-linecap="round" opacity="0.85"/>
+    <line x1="93" y1="140" x2="79" y2="162" stroke="#5aaec0" stroke-width="1.1" stroke-linecap="round" opacity="0.62"/>
+    <path d="M76 161 L69 170 M76 161 L73 172 M76 161 L76 173 M76 161 L80 172 M76 161 L83 171" stroke="#52a8c0" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/>
+    <ellipse cx="76" cy="165" rx="10" ry="6" fill="none" stroke="#00e676" stroke-width="1" stroke-dasharray="2,1.5" opacity="0.7"/>
+    <text x="62" y="162" fill="#00e676" font-size="5" font-family="monospace" opacity="0.9">✓ BANDAGE</text>
+    <rect x="66" y="166" width="20" height="3" rx="1.5" fill="#00e676" opacity="0.42"/>
+    <path d="M154 95 Q163 95 165 103 Q166 111 158 113 Q152 113 151 106Z" fill="#172f42" stroke="#5ab8d0" stroke-width="0.85" opacity="0.85"/>
+    <line x1="160" y1="113" x2="176" y2="140" stroke="#80d0e8" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/>
+    <line x1="176" y1="140" x2="192" y2="161" stroke="#6abccc" stroke-width="1.7" stroke-linecap="round" opacity="0.85"/>
+    <line x1="175" y1="140" x2="189" y2="162" stroke="#5aaec0" stroke-width="1.1" stroke-linecap="round" opacity="0.62"/>
+    <path d="M192 161 L185 170 M192 161 L189 172 M192 161 L192 173 M192 161 L196 172 M192 161 L199 171" stroke="#52a8c0" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/>
+    <path d="M134 210 Q128 220 117 228 M134 210 Q140 220 151 228" fill="none" stroke="#5ab0c8" stroke-width="2.1" stroke-linecap="round" opacity="0.72"/>
+    <g fill="#132840" stroke="#4a9ab0" stroke-width="0.5" opacity="0.6"><circle cx="131" cy="213" r="1.5"/><circle cx="134" cy="216" r="1.5"/><circle cx="137" cy="213" r="1.5"/><circle cx="127" cy="219" r="1.2"/><circle cx="141" cy="219" r="1.2"/></g>
+    <path d="M117 228 Q112 236 110 244 M151 228 Q156 236 158 244" fill="none" stroke="#4a9ab0" stroke-width="1.4" stroke-linecap="round" opacity="0.55"/>
+    <path d="M110 244 Q108 252 109 258 M158 244 Q160 252 159 258" fill="none" stroke="#4a9ab0" stroke-width="1.1" stroke-linecap="round" opacity="0.4"/>
+    <rect x="160" y="260" width="106" height="10" rx="2" fill="#0a1520" opacity="0.8"/>
+    <text x="164" y="268" fill="#00c9a7" font-size="7" font-family="monospace" opacity="0.9">MONTEREY RESCUE CTR</text>`;
+  }
+}
+
+// ═══════ SCREEN NAV ═══════
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-'+id).classList.add('active');}
+
+// ═══════ AUDIO ═══════
 let _ac=null;
 function ac(){if(!_ac)_ac=new(window.AudioContext||window.webkitAudioContext)();return _ac;}
 const sounds={
@@ -637,48 +1016,142 @@ const sounds={
 };
 function playTone(freqs,vol){try{const a=ac();freqs.forEach((f,i)=>{const o=a.createOscillator(),g=a.createGain();o.connect(g);g.connect(a.destination);o.frequency.value=f;g.gain.value=vol;const t=a.currentTime+i*0.12;o.start(t);o.stop(t+0.1);});}catch(e){}}
 function playBeep(f,v){try{const a=ac(),o=a.createOscillator(),g=a.createGain();o.connect(g);g.connect(a.destination);o.frequency.value=f;o.type='sawtooth';g.gain.setValueAtTime(v,a.currentTime);g.gain.exponentialRampToValueAtTime(0.001,a.currentTime+0.4);o.start();o.stop(a.currentTime+0.4);}catch(e){}}
-function playHeartbeat(){try{const a=ac();[0,0.13].forEach(d=>{const o=a.createOscillator(),g=a.createGain();o.connect(g);g.connect(a.destination);o.frequency.value=55;o.type='sine';const t=a.currentTime+d;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(0.17,t+0.02);g.gain.exponentialRampToValueAtTime(0.001,t+0.13);o.start(t);o.stop(t+0.15);});}catch(e){}}
+function playHeartbeat(){
+  try{
+    const a=ac();
+    [0,0.15].forEach(d=>{
+      const o=a.createOscillator(),g=a.createGain();
+      o.connect(g);g.connect(a.destination);
+      o.frequency.value=50;o.type='sine';
+      const t=a.currentTime+d;
+      g.gain.setValueAtTime(0,t);
+      g.gain.linearRampToValueAtTime(0.55,t+0.025); // LOUDER
+      g.gain.exponentialRampToValueAtTime(0.001,t+0.18);
+      o.start(t);o.stop(t+0.2);
+    });
+  }catch(e){}
+}
 
-// LOG
+// ═══════ HEART MONITOR (20s, start/stop) ═══════
+let hInt=null,hCanvas,hCtx,hOff=0,hBeat=0,hTimerInt=null,hSecondsLeft=20;
+
+function startHeartMonitor(){
+  hCanvas=document.getElementById('heartCanvas');
+  hCtx=hCanvas.getContext('2d');
+  hCanvas.width=hCanvas.offsetWidth||600;
+  if(hInt)return;
+  hSecondsLeft=20;
+  document.getElementById('heartTimerNum').textContent='20';
+  document.getElementById('heartTimer').style.display='flex';
+  document.getElementById('heartStartBtn').style.display='none';
+  document.getElementById('heartStopBtn').style.display='inline-flex';
+  hInt=setInterval(drawHeart,40);
+  hTimerInt=setInterval(()=>{
+    hSecondsLeft--;
+    document.getElementById('heartTimerNum').textContent=hSecondsLeft;
+    if(hSecondsLeft<=0)stopHeartMonitor();
+  },1000);
+  addLog('💓','Heart monitor started — listening to heartbeat!',true);
+  showToast('💓 Heart monitor running for 20 seconds...');
+}
+function stopHeartMonitor(){
+  if(hInt){clearInterval(hInt);hInt=null;}
+  if(hTimerInt){clearInterval(hTimerInt);hTimerInt=null;}
+  document.getElementById('heartTimer').style.display='none';
+  document.getElementById('heartStartBtn').style.display='inline-flex';
+  document.getElementById('heartStopBtn').style.display='none';
+  if(hCtx){const w=hCanvas.width,h=hCanvas.height;hCtx.fillStyle='#0d1b2a';hCtx.fillRect(0,0,w,h);}
+  addLog('💓','Heart monitor stopped.',true);
+  showToast('⏹ Heart monitor stopped.');
+}
+function drawHeart(){
+  if(!hCtx)return;
+  const w=hCanvas.width,h=hCanvas.height;
+  hCtx.fillStyle='#0d1b2a';hCtx.fillRect(0,0,w,h);
+  hCtx.strokeStyle='rgba(0,230,118,0.1)';hCtx.lineWidth=0.5;
+  for(let y=0;y<h;y+=11){hCtx.beginPath();hCtx.moveTo(0,y);hCtx.lineTo(w,y);hCtx.stroke();}
+  for(let x=0;x<w;x+=44){hCtx.beginPath();hCtx.moveTo(x,0);hCtx.lineTo(x,h);hCtx.stroke();}
+  hOff+=2;
+  const bpm=62,period=Math.round(60/bpm*25);
+  const pts=[];
+  for(let x=0;x<w;x++){
+    const pos=(x+hOff)%period;let y=h/2;
+    if(pos<2)y=h/2+2*pos;
+    else if(pos<4)y=h/2+4-20*(pos-2);
+    else if(pos<5)y=h/2-36+40*(pos-4);
+    else if(pos<6)y=h/2+4-6*(pos-5);
+    else if(pos<8)y=h/2-2+3*(pos-6);
+    else y=h/2+Math.sin((pos/period)*Math.PI*2)*1.5;
+    pts.push({x,y});
+  }
+  hCtx.shadowColor='#00e676';hCtx.shadowBlur=6;
+  hCtx.strokeStyle='rgba(0,230,118,0.25)';hCtx.lineWidth=6;
+  hCtx.beginPath();pts.forEach((p,i)=>i===0?hCtx.moveTo(p.x,p.y):hCtx.lineTo(p.x,p.y));hCtx.stroke();
+  hCtx.shadowBlur=0;
+  hCtx.strokeStyle='#00e676';hCtx.lineWidth=2;
+  hCtx.beginPath();pts.forEach((p,i)=>i===0?hCtx.moveTo(p.x,p.y):hCtx.lineTo(p.x,p.y));hCtx.stroke();
+  hBeat++;if(hBeat>=period){hBeat=0;playHeartbeat();}
+}
+
+// ═══════ VITALS ═══════
+function updateVitals(){
+  const hr=58+Math.floor(Math.random()*10),temp=(101+Math.random()*0.8).toFixed(1),o2=96+Math.floor(Math.random()*3);
+  document.getElementById('hrVal').textContent=hr;document.getElementById('bpmNum').textContent=hr;
+  document.getElementById('tempVal').textContent=temp;document.getElementById('o2Val').textContent=o2;
+  showToast('💉 Vitals updated!');sounds.scan();
+}
+
+// ═══════ XRAY ═══════
+function runXray(){
+  const sl=document.getElementById('scanLine');sl.style.display='block';
+  setTimeout(()=>{sl.style.display='none';addLog('🔬','X-Ray scan complete — bones look healthy!');},3200);
+  sounds.xray();showToast('🔬 X-Ray scanning '+PATIENTS[currentPatient].name+'...');
+}
+
+// ═══════ LOG ═══════
 const logData=[];
 function addLog(icon,text,silent){
   if(!text||!text.trim())return;
-  const now=new Date();
-  logData.unshift({icon,text,time:now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})});
-  renderLog();
-  if(!silent){sounds.click();showToast(icon+' '+text);}
+  logData.unshift({icon,text,time:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})});
+  renderLog();if(!silent){sounds.click();showToast(icon+' '+text);}
 }
 function renderLog(){
   const el=document.getElementById('logList');
-  if(!logData.length){el.innerHTML='<div class="log-empty">No entries yet! Feed Onyx or check her bandage 🦦</div>';return;}
+  if(!logData.length){el.innerHTML='<div class="log-empty">No entries yet 🌊</div>';return;}
   el.innerHTML=logData.map(e=>`<div class="log-entry"><span class="log-icon">${e.icon}</span><div class="log-text">${e.text}</div><span class="log-time">${e.time}</span></div>`).join('');
 }
 
-// ACTIONS
+// ═══════ ACTIONS ═══════
 const ACTIONS={
-  feed:{icon:'🐟',msg:'Fed Onyx — 3 anchovies + vitamins!',sound:'feed'},
-  bandage:{icon:'🩹',msg:'Checked left flipper bandage — looking clean!',sound:'bandage'},
-  medicine:{icon:'💊',msg:'Gave pain relief medicine',sound:'medicine'},
-  xray:{icon:'🔬',msg:'X-Ray scan completed',sound:'xray'},
-  scan:{icon:'📡',msg:'Full body scan running...',sound:'scan'},
-  sleep:{icon:'😴',msg:'Onyx is resting comfortably',sound:'rest'}
+  feed:{icon:'🐟',msg:()=>'Fed '+PATIENTS[currentPatient].name+' — meal complete!',sound:'feed'},
+  bandage:{icon:'🩹',msg:()=>'Checked bandage on '+PATIENTS[currentPatient].name+' — looking clean!',sound:'bandage'},
+  medicine:{icon:'💊',msg:()=>'Gave pain relief medicine to '+PATIENTS[currentPatient].name,sound:'medicine'},
+  xray:{icon:'🔬',msg:()=>'X-Ray scan completed',sound:'xray'},
+  scan:{icon:'📡',msg:()=>'Full body scan running...',sound:'scan'},
+  sleep:{icon:'😴',msg:()=>PATIENTS[currentPatient].name+' is resting comfortably',sound:'rest'}
 };
 function doAction(type,btn){
   const a=ACTIONS[type];if(!a)return;
   sounds[a.sound]&&sounds[a.sound]();
-  addLog(a.icon,a.msg,true); showToast(a.icon+' '+a.msg);
-  if(btn)rippleEffect(btn);
-  if(type==='xray')runXray();
+  const msg=a.msg();addLog(a.icon,msg,true);showToast(a.icon+' '+msg);
+  if(btn)rippleEffect(btn);if(type==='xray')runXray();
 }
 function rippleEffect(el){const r=document.createElement('div');r.className='ripple';el.appendChild(r);setTimeout(()=>r.remove(),500);}
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);}
 
+// ═══════ BIG CENTERED TOAST (5 seconds) ═══════
+let toastTimeout=null;
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  if(toastTimeout)clearTimeout(toastTimeout);
+  toastTimeout=setTimeout(()=>t.classList.remove('show'),5000);
+}
+
+// ═══════ PANELS ═══════
 function showPanel(id,btn){
   document.querySelectorAll('.panel-section').forEach(p=>p.classList.remove('active'));
   document.getElementById('panel-'+id).classList.add('active');
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   if(btn)btn.classList.add('active');
-  if(id==='vitals')startHeartMonitor();
   sounds.click();
 }
 function toggleCheck(item){
@@ -688,93 +1161,52 @@ function toggleCheck(item){
   else{box.textContent='';status.className='check-status pending';status.textContent='Check';}
   sounds.click();
 }
-function saveVisit(){const name=document.getElementById('petName').value||'Onyx';const reason=document.getElementById('reason').value;addLog('📋',`Visit saved for ${name}: ${reason||'routine visit'}`);sounds.success();showToast('✅ Visit record saved!');}
+function saveVisit(){const name=document.getElementById('petName').value||PATIENTS[currentPatient].name;const reason=document.getElementById('reason').value;addLog('📋',`Visit saved for ${name}: ${reason||'routine visit'}`);sounds.success();showToast('✅ Visit record saved!');}
 function clearForm(){document.getElementById('notes').value='';sounds.click();}
 
-// HEART MONITOR WITH SOUND
-let hInt=null,hCanvas,hCtx,hOff=0,hBeat=0;
-function startHeartMonitor(){
-  hCanvas=document.getElementById('heartCanvas');
-  hCtx=hCanvas.getContext('2d');
-  hCanvas.width=hCanvas.offsetWidth||600;
-  if(hInt)return;
-  hInt=setInterval(drawHeart,40);
-}
-function drawHeart(){
-  if(!hCtx)return;
-  const w=hCanvas.width,h=hCanvas.height;
-  hCtx.fillStyle='#0d1b2a';hCtx.fillRect(0,0,w,h);
-  // grid
-  hCtx.strokeStyle='rgba(0,230,118,0.1)';hCtx.lineWidth=0.5;
-  for(let y=0;y<h;y+=11){hCtx.beginPath();hCtx.moveTo(0,y);hCtx.lineTo(w,y);hCtx.stroke();}
-  for(let x=0;x<w;x+=44){hCtx.beginPath();hCtx.moveTo(x,0);hCtx.lineTo(x,h);hCtx.stroke();}
-  hOff+=2;
-  const bpm=62,period=Math.round(60/bpm*25);
-  const pts=[];
-  for(let x=0;x<w;x++){
-    const pos=(x+hOff)%period;
-    let y=h/2;
-    if(pos<2)y=h/2+2*pos;
-    else if(pos<4)y=h/2+4-20*(pos-2);
-    else if(pos<5)y=h/2-36+40*(pos-4);
-    else if(pos<6)y=h/2+4-6*(pos-5);
-    else if(pos<8)y=h/2-2+3*(pos-6);
-    else y=h/2+Math.sin((pos/period)*Math.PI*2)*1.5;
-    pts.push({x,y});
-  }
-  // glow
-  hCtx.shadowColor='#00e676';hCtx.shadowBlur=5;
-  hCtx.strokeStyle='rgba(0,230,118,0.28)';hCtx.lineWidth=5;
-  hCtx.beginPath();pts.forEach((p,i)=>i===0?hCtx.moveTo(p.x,p.y):hCtx.lineTo(p.x,p.y));hCtx.stroke();
-  hCtx.shadowBlur=0;
-  hCtx.strokeStyle='#00e676';hCtx.lineWidth=2;
-  hCtx.beginPath();pts.forEach((p,i)=>i===0?hCtx.moveTo(p.x,p.y):hCtx.lineTo(p.x,p.y));hCtx.stroke();
-  hBeat++;
-  if(hBeat>=period){hBeat=0;playHeartbeat();}
-}
-
-function updateVitals(){
-  const hr=58+Math.floor(Math.random()*10),temp=(101+Math.random()*0.8).toFixed(1),o2=96+Math.floor(Math.random()*3);
-  document.getElementById('hrVal').textContent=hr;
-  document.getElementById('bpmNum').textContent=hr;
-  document.getElementById('tempVal').textContent=temp;
-  document.getElementById('o2Val').textContent=o2;
-  showToast('💉 Vitals updated!');sounds.scan();
-}
-function runXray(){
-  const sl=document.getElementById('scanLine');sl.style.display='block';
-  setTimeout(()=>{sl.style.display='none';addLog('🔬','X-Ray complete — bones look healthy! Bandage site stable ✓');},3200);
-  sounds.xray();showToast('🔬 X-Ray scanning Onyx...');
-}
+// ═══════ DISCHARGE ═══════
 function openDischarge(){document.getElementById('modalDate').textContent=new Date().toLocaleDateString();document.getElementById('dischargeModal').classList.add('open');sounds.click();}
 function signChart(){sounds.success();addLog('⭐',`Chart signed by ${doctorName} — Visit complete!`);document.getElementById('dischargeModal').classList.remove('open');showToast('⭐ Chart signed! Great work '+doctorName+'!');}
 
-// CAMERA
+// ═══════ CAMERA ═══════
 let stream=null;
-function startCamera(){
-  navigator.mediaDevices.getUserMedia({video:{facingMode:'user'}})
-    .then(s=>{stream=s;const v=document.getElementById('camVideo');v.srcObject=s;v.style.display='block';document.getElementById('camPlaceholder').style.display='none';document.getElementById('snapOverlay').style.display='flex';sounds.click();})
-    .catch(()=>showToast('📷 Camera not available — ask a grown-up!'));
-}
+function startCamera(){navigator.mediaDevices.getUserMedia({video:{facingMode:'user'}}).then(s=>{stream=s;const v=document.getElementById('camVideo');v.srcObject=s;v.style.display='block';document.getElementById('camPlaceholder').style.display='none';document.getElementById('snapOverlay').style.display='flex';sounds.click();}).catch(()=>showToast('📷 Camera not available — ask a grown-up!'));}
 function stopCamera(){if(stream)stream.getTracks().forEach(t=>t.stop());document.getElementById('camVideo').style.display='none';document.getElementById('camPlaceholder').style.display='flex';document.getElementById('snapOverlay').style.display='none';}
 function takePhoto(){
   const v=document.getElementById('camVideo'),c=document.getElementById('snapCanvas');
   c.width=v.videoWidth||320;c.height=v.videoHeight||240;c.getContext('2d').drawImage(v,0,0);
   const url=c.toDataURL('image/jpeg',0.8);
-  ['photoGrid','mainPhotoGrid'].forEach(id=>{
-    const g=document.getElementById(id),th=document.createElement('div');th.className='photo-thumb';
-    const img=document.createElement('img');img.src=url;th.appendChild(img);g.insertBefore(th,g.firstChild);
-  });
-  addLog('📷','Photo taken of Onyx during exam');sounds.success();showToast('📸 Photo saved!');
+  ['photoGrid','mainPhotoGrid'].forEach(id=>{const g=document.getElementById(id),th=document.createElement('div');th.className='photo-thumb';const img=document.createElement('img');img.src=url;th.appendChild(img);g.insertBefore(th,g.firstChild);});
+  addLog('📷','Photo taken of '+PATIENTS[currentPatient].name+' during exam');sounds.success();showToast('📸 Photo saved!');
 }
 document.getElementById('logInput').addEventListener('keydown',function(e){if(e.key==='Enter'&&this.value.trim()){addLog('📝',this.value.trim());this.value='';}});
 
-// INIT
+// ═══════ VIDEOS ═══════
+function openVideo(url,title,src,age){
+  document.getElementById('vmTitle').innerHTML=title;
+  document.getElementById('vmSrc').textContent=src+' • '+age;
+  document.getElementById('vmFrame').src=url+'?autoplay=1&rel=0';
+  document.getElementById('videoModal').classList.add('open');
+}
+function closeVideo(){
+  document.getElementById('vmFrame').src='';
+  document.getElementById('videoModal').classList.remove('open');
+}
+
+// ═══════ INIT ═══════
 const today=new Date();
 document.getElementById('visitDate').value=today.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
 document.getElementById('xDate').textContent=today.toLocaleDateString('en-US',{month:'2-digit',day:'2-digit',year:'2-digit'});
 addLog('🌊','Onyx arrived at the clinic — rescued from Monterey Bay',true);
 addLog('🩺','Initial checkup started',true);
+applyDoctor();
+
+// AI auto-popup after 4 seconds on dashboard
+setTimeout(()=>{
+  if(document.getElementById('screen-dashboard').classList.contains('active')){
+    getAIPrompt();
+  }
+},4000);
 </script>
 </body>
 </html>
